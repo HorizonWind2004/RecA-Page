@@ -70,6 +70,13 @@
                   </a>
                 </span>
                 <span class="link-block">
+                  <a href="static/uno_files/teaser/teaser.pdf" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Teaser PDF</span>
+                  </a>
+                </span>
+                <span class="link-block">
                   <a href="https://arxiv.org/abs/2412.17910" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="ai ai-arxiv"></i></span>
@@ -130,8 +137,29 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
+          <h2 class="title is-4">Teaser</h2>
+          <div class="content has-text-justified" style="color: #363636;">
+            <p>
+              ReAlign demonstrates remarkable improvements in multimodal understanding and generation capabilities through our novel reconstruction alignment approach.
+            </p>
+          </div>
+          <div style="text-align: center; margin: 20px 0;">
+            <a href="static/uno_files/teaser/teaser.pdf" target="_blank">
+              <img src="static/uno_files/teaser/1.png" alt="ReAlign Teaser" style="width: 90%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); cursor: pointer;" />
+            </a>
+            <p style="margin-top: 10px; font-size: 0.9em; color: #7f8c8d;">Click image to view full teaser PDF</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
           <h2 class="title is-4">ReAlign: Enhancing Multimodal Understanding and Generation</h2>
-          <div class="content has-text-justified">
+          <div class="content has-text-justified" style="color: #363636;">
             <p>
               ReAlign implements a self-supervised training paradigm that treats the unified multimodal model as an autoencoder. The model reconstructs images from their own vision encoder embeddings, providing dense supervision that preserves fine-grained visual details that captions often miss. This semantic-level reconstruction provides unbiased supervision that naturally aligns the model's understanding and generation capabilities without requiring any paired image-text data.
             </p>
@@ -147,7 +175,7 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
           <h2 class="title is-4">State-of-the-Art Performance</h2>
-          <div class="content has-text-justified">
+          <div class="content has-text-justified" style="color: #363636;">
             <p>
               ReAlign achieves state-of-the-art results on GenEval (0.90) and DPGBench (88.15), outperforming models with significantly larger scale. Our 1.5B parameter model surpasses recent works like Janus-Pro, OmniGen2, and BAGEL by substantial margins while requiring minimal computational resources—just 6×A100 GPUs for 4.5 hours and 8,000 unlabeled images.
             </p>
@@ -163,7 +191,7 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
           <h2 class="title is-4">What can ReAlign do?</h2>
-          <div class="content has-text-justified">
+          <div class="content has-text-justified" style="color: #363636;">
             <p>
               ReAlign demonstrates strong capabilities across various generation and editing tasks including stylization, object removal, object addition, and human preference editing. Our method enhances image editing quality, increasing ImgEdit scores from 3.38 to <strong>3.75</strong> and GEdit from 6.94 to <strong>7.25</strong>.
             </p>
