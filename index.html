@@ -40,8 +40,8 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1"><img src="static/uno_files/teaser/logo.png" style="width: 48px; height: 48px; margin-right: 10px;" /> ReAlign: Reconstruction Alignment Improves Unified Multimodal Models</h1>
-            <h2 class="subtitle is-4" style="color: #7f8c8d; margin-top: 10px;">Bridging the Gap between Multimodal Understanding and Generation</h2>
+            <h1 class="title is-1"><img src="static/uno_files/teaser/logo.png" style="width: 64px; height: 64px; margin-right: 15px; vertical-align: middle;" /> ReAlign: Reconstruction Alignment Improves Unified Multimodal Models</h1>
+            <h2 class="subtitle is-4" style="color: #7f8c8d; margin-top: 10px;">Unlocking the Massive Zero-shot Potential in Unified Multimodal Models through Self-supervised Learning</h2>
             <div class="is-size-5 publication-authors">
               <span class="author-block" style="color: #363636;">
                 <a target="_blank" href="https://horizonwind2004.github.io/" style="color: #3273dc;">Ji Xie</a><sup>1</sup>,</span>
@@ -115,7 +115,7 @@
               Unified multimodal models (UMMs) are designed to perform both vision understanding and image generation within a single architecture. While they have achieved strong performance on image-text understanding tasks, their generation capabilities often lag behind, revealing a misalignment between what the model understands and what it can produce. We identify this disconnect as a consequence of sparse and biased text supervision in conventional training.
             </p>
             <p>
-              We propose <strong>ReAlign</strong> (Reconstruct to Better Generate), a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level. By reconstructing images from their own vision encoder embeddings, UMMs receive dense, semantically grounded supervision—free of captions or paired image-text data. This alignment mechanism effectively bridges the modality gap and improves generation fidelity.
+              We propose <strong>ReAlign</strong>, a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level. By reconstructing images from their own vision encoder embeddings, UMMs receive dense, semantically grounded supervision—free of captions or paired image-text data. This alignment mechanism effectively bridges the modality gap and improves generation fidelity.
             </p>
             <p>
               Despite its simplicity, our approach delivers strong gains for unified multimodal models across generation and editing tasks. Applied to a 1.5B parameter UMM, ReAlign achieves state-of-the-art results on GenEval (<strong>0.90</strong>) and DPGBench (<strong>88.15</strong>), outperforming models with significantly larger scale. More impressively, ReAlign achieves this with modest compute, requiring just 8,000 unlabeled images and <strong>6×A100 GPUs for 4.5 hours (27 GPU-hours)</strong>.
@@ -179,37 +179,8 @@
   </section>
 
   <!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>@article{xie2024realign,
-  title={ReAlign: Reconstruct to Better Generate - Bridging the Gap between Multimodal Understanding and Generation},
-  author={Xie, Ji and Darrell, Trevor and Zettlemoyer, Luke and Wang, XuDong},
-  journal={arXiv preprint arXiv:2412.17910},
-  year={2024},
-  url={https://arxiv.org/abs/2412.17910},
-}</code></pre>
-    </div>
-  </section>
-  <!--End BibTex citation -->
 
-  <footer class="footer">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content">
-            <p>
-              We open-source this project for academic research. The vast majority of images used in this project are either generated or licensed. If you have any concerns, please contact us, and we will promptly remove any inappropriate content. Any models based on underlying architectures must adhere to their original licensing terms.
-            </p>
-            <p>
-              Thanks to <a href="https://github.com/bytedance/UNO/tree/gh-pages" target="_blank">UNO</a> for the page template inspiration.
-              This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <!--End BibTex citation -->
 
 </body>
 
