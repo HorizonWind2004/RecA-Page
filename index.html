@@ -1,168 +1,216 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ReAlign: Towards Unified Language-Image Pretraining</title>
-<!-- 引用 .ico 格式的 favicon -->
-<link rel="icon" href="static/uno_files/teaser/logo.png" type="image/png">
-<link rel="shortcut icon" href="static/uno_files/teaser/logo.png" type="image/png">
+  <meta charset="utf-8" />
+  <meta name="description" content="ReAlign: Reconstruct to Better Generate - Bridging the Gap between Multimodal Understanding and Generation" />
+  <meta property="og:title" content="ReAlign: Reconstruct to Better Generate" />
+  <meta property="og:description"
+    content="Introducing ReAlign, a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level." />
+  <meta property="og:url" content="https://horizonwind2004.github.io/ReAlign-Page" />
+  <meta name="twitter:title" content="ReAlign: Reconstruct to Better Generate" />
+  <meta name="twitter:description"
+    content="Introducing ReAlign, a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level." />
+  <meta name="keywords" content="ReAlign, Vision-Language, Multimodal, Image Generation, AI, Machine Learning" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- Common stylesheet -->
-<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-      rel="stylesheet">
-<link href="static/css/bulma.min.css" rel="stylesheet">
-<link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-<link rel="stylesheet" href="static/css/bulma-slider.min.css">
-<link href="static/css/fontawesome.all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <title>ReAlign: Reconstruct to Better Generate</title>
 
-<link href="static/css/style.css" rel="stylesheet">
-<style>
-  body {
-    font-family: 'Google Sans', sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 40px 20px;
-  }
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 60px;
-  }
-  .title-section {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  .emoji-title {
-    font-size: 3rem;
-    margin-bottom: 20px;
-  }
-  .main-title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 30px;
-    line-height: 1.2;
-  }
-  .authors {
-    font-size: 1.2rem;
-    color: #3498db;
-    margin-bottom: 10px;
-    line-height: 1.6;
-  }
-  .authors a {
-    color: #3498db;
-    text-decoration: none;
-  }
-  .authors a:hover {
-    text-decoration: underline;
-  }
-  .institution {
-    font-size: 1.1rem;
-    color: #7f8c8d;
-    margin-bottom: 30px;
-  }
-  .button-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 50px;
-    flex-wrap: wrap;
-  }
-  .btn {
-    padding: 12px 24px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .btn-dark {
-    background-color: #2c3e50;
-    color: white;
-  }
-  .btn-dark:hover {
-    background-color: #34495e;
-    transform: translateY(-2px);
-  }
-  .btn-blue {
-    background-color: #3498db;
-    color: white;
-  }
-  .btn-blue:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
-  }
-  .btn-orange {
-    background-color: #f39c12;
-    color: white;
-  }
-  .btn-orange:hover {
-    background-color: #e67e22;
-    transform: translateY(-2px);
-  }
-  .abstract-section {
-    margin-bottom: 40px;
-  }
-  .section-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 25px;
-  }
-  .abstract-text {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #2c3e50;
-    text-align: justify;
-  }
-</style>
+  <link rel="icon" type="image/png" href="static/uno_files/teaser/logo.png">
+  <link rel="shortcut icon" href="static/uno_files/teaser/logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+
 </head>
 
 <body>
-<div class="container">
-  <div class="title-section">
-    <div class="emoji-title">🌸</div>
-    <h1 class="main-title">ReAlign: Towards Unified Language-Image Pretraining</h1>
-    
-    <div class="authors">
-      <a href="https://horizonwind2004.github.io/" target="_blank">Ji Xie</a>, 
-      <a href="https://people.eecs.berkeley.edu/~trevor/" target="_blank">Trevor Darrell</a>, 
-      <a href="https://homes.cs.washington.edu/~lsz/" target="_blank">Luke Zettlemoyer</a>, 
-      <a href="https://people.eecs.berkeley.edu/~xdwang/" target="_blank">XuDong Wang</a>
-    </div>
-    
-    <div class="institution">UC Berkeley, University of Washington</div>
-    
-    <div class="button-group">
-      <a href="https://arxiv.org/pdf/2412.17910" class="btn btn-dark" target="_blank">
-        📄 Paper
-      </a>
-      <a href="https://arxiv.org/abs/2412.17910" class="btn btn-blue" target="_blank">
-        📋 ArXiv
-      </a>
-      <a href="https://github.com/HorizonWind2004/ReAlign" class="btn btn-dark" target="_blank">
-        💻 Code/Models
-      </a>
-      <a href="https://huggingface.co/horizonwind2004/ReAlign-Harmon-1.5B" class="btn btn-orange" target="_blank">
-        🤗 HF Models (Coming Soon)
-      </a>
-    </div>
-  </div>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1"><img src="static/uno_files/teaser/logo.png" style="width: 32px; height: 32px;" /> ReAlign: Reconstruct to Better Generate</h1>
+            <h2 class="subtitle is-4" style="color: #7f8c8d; margin-top: 10px;">Bridging the Gap between Multimodal Understanding and Generation</h2>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a target="_blank" href="https://horizonwind2004.github.io/">Ji Xie</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank" href="https://people.eecs.berkeley.edu/~trevor/">Trevor Darrell</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank" href="https://homes.cs.washington.edu/~lsz/">Luke Zettlemoyer</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a target="_blank" href="https://people.eecs.berkeley.edu/~xdwang/">XuDong Wang</a><sup>1*</sup>
+              </span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>UC Berkeley&nbsp;&nbsp;<sup>2</sup>University of Washington</span>
+            </div>
+            <div class="is-size-6 publication-authors">
+              <span class="author-block"><sup>*</sup>Corresponding Author</span>
+            </div>
 
-  <div class="abstract-section">
-    <h2 class="section-title">Abstract</h2>
-    <p class="abstract-text">
-      Unified multimodal models (UMMs) are designed to perform both vision understanding and image generation within a single architecture. While they have achieved strong performance on image-text understanding tasks, their generation capabilities often lag behind, revealing a misalignment between what the model understands and what it can produce. We identify this disconnect as a consequence of sparse and biased text supervision in conventional training. We introduce <strong>ReAlign</strong>, a novel model integrating generative data augmentation, enhanced contrastive learning, and reconstruction regularization to improve vision-language alignment. Our approach significantly outperforms existing models across multiple benchmarks, setting a new state-of-the-art in zero-shot classification and vision-language reasoning.
-    </p>
-  </div>
-</div>
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2412.17910" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2412.17910" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>ArXiv</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/HorizonWind2004/ReAlign" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code/Models</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://huggingface.co/horizonwind2004/ReAlign-Harmon-1.5B" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">🤗</span>
+                    <span>HF Models</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://huggingface.co/spaces/horizonwind2004/ReAlign" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">🔥</span>
+                    <span>Demo</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Unified multimodal models (UMMs) are designed to perform both vision understanding and image generation within a single architecture. While they have achieved strong performance on image-text understanding tasks, their generation capabilities often lag behind, revealing a misalignment between what the model understands and what it can produce. We identify this disconnect as a consequence of sparse and biased text supervision in conventional training.
+            </p>
+            <p>
+              We propose <strong>ReAlign</strong> (Reconstruct to Better Generate), a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level. By reconstructing images from their own vision encoder embeddings, UMMs receive dense, semantically grounded supervision—free of captions or paired image-text data. This alignment mechanism effectively bridges the modality gap and improves generation fidelity.
+            </p>
+            <p>
+              Despite its simplicity, our approach delivers strong gains for unified multimodal models across generation and editing tasks. Applied to a 1.5B parameter UMM, ReAlign achieves state-of-the-art results on GenEval (<strong>0.90</strong>) and DPGBench (<strong>88.15</strong>), outperforming models with significantly larger scale. More impressively, ReAlign achieves this with modest compute, requiring just 8,000 unlabeled images and <strong>6×A100 GPUs for 4.5 hours (27 GPU-hours)</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-4">ReAlign: Enhancing Multimodal Understanding and Generation</h2>
+          <div class="content has-text-justified">
+            <p>
+              ReAlign implements a self-supervised training paradigm that treats the unified multimodal model as an autoencoder. The model reconstructs images from their own vision encoder embeddings, providing dense supervision that preserves fine-grained visual details that captions often miss. This semantic-level reconstruction provides unbiased supervision that naturally aligns the model's understanding and generation capabilities without requiring any paired image-text data.
+            </p>
+          </div>
+          <img src="static/uno_files/method/method.png" alt="Figure 1: ReAlign Method Overview" style="width: 100%; margin: 20px 0;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-4">State-of-the-Art Performance</h2>
+          <div class="content has-text-justified">
+            <p>
+              ReAlign achieves state-of-the-art results on GenEval (0.90) and DPGBench (88.15), outperforming models with significantly larger scale. Our 1.5B parameter model surpasses recent works like Janus-Pro, OmniGen2, and BAGEL by substantial margins while requiring minimal computational resources—just 6×A100 GPUs for 4.5 hours and 8,000 unlabeled images.
+            </p>
+          </div>
+          <img src="static/uno_files/comparison/gpt4o_comparison.png" alt="Table 1: Benchmark Comparison" style="width: 100%; margin: 20px 0;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-4">What can ReAlign do?</h2>
+          <div class="content has-text-justified">
+            <p>
+              ReAlign demonstrates strong capabilities across various generation and editing tasks including stylization, object removal, object addition, and human preference editing. Our method enhances image editing quality, increasing ImgEdit scores from 3.38 to <strong>3.75</strong> and GEdit from 6.94 to <strong>7.25</strong>.
+            </p>
+          </div>
+          <div class="video-container" style="text-align: center; margin: 20px 0;">
+            <video width="80%" controls autoplay muted loop>
+              <source src="static/uno_files/teaser/teaser_medium.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{xie2024realign,
+  title={ReAlign: Reconstruct to Better Generate - Bridging the Gap between Multimodal Understanding and Generation},
+  author={Xie, Ji and Darrell, Trevor and Zettlemoyer, Luke and Wang, XuDong},
+  journal={arXiv preprint arXiv:2412.17910},
+  year={2024},
+  url={https://arxiv.org/abs/2412.17910},
+}</code></pre>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              We open-source this project for academic research. The vast majority of images used in this project are either generated or licensed. If you have any concerns, please contact us, and we will promptly remove any inappropriate content. Any models based on underlying architectures must adhere to their original licensing terms.
+            </p>
+            <p>
+              Thanks to <a href="https://github.com/bytedance/UNO/tree/gh-pages" target="_blank">UNO</a> for the page template inspiration.
+              This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 </body>
+
 </html>
