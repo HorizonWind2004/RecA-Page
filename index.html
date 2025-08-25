@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ReAlign</title>
+<title>ReAlign: Towards Unified Language-Image Pretraining</title>
 <!-- 引用 .ico 格式的 favicon -->
 <link rel="icon" href="static/uno_files/teaser/logo.png" type="image/png">
 <link rel="shortcut icon" href="static/uno_files/teaser/logo.png" type="image/png">
@@ -16,329 +16,153 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
 <link href="static/css/style.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Chewy:regular" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css?family=Kaushan+Script:regular" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Patrick+Hand&family=Indie+Flower&family=Schoolbell&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Google Sans', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 40px 20px;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 60px;
+  }
+  .title-section {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .emoji-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  .main-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    line-height: 1.2;
+  }
+  .authors {
+    font-size: 1.2rem;
+    color: #3498db;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  .authors a {
+    color: #3498db;
+    text-decoration: none;
+  }
+  .authors a:hover {
+    text-decoration: underline;
+  }
+  .institution {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+  }
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-dark {
+    background-color: #2c3e50;
+    color: white;
+  }
+  .btn-dark:hover {
+    background-color: #34495e;
+    transform: translateY(-2px);
+  }
+  .btn-blue {
+    background-color: #3498db;
+    color: white;
+  }
+  .btn-blue:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+  }
+  .btn-orange {
+    background-color: #f39c12;
+    color: white;
+  }
+  .btn-orange:hover {
+    background-color: #e67e22;
+    transform: translateY(-2px);
+  }
+  .abstract-section {
+    margin-bottom: 40px;
+  }
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .abstract-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #2c3e50;
+    text-align: justify;
+  }
+</style>
 </head>
 
 <body>
-<div class="column has-text-centered" style="background: #ffffff;width: 100%">
-  <br>
-  <br>
-  <h1 class="title is-1 publication-title">
-    <img id="title-icon" src="static/uno_files/teaser/logo.png" alt="Icon">
-    <span style="font-size: 40px; color:#15bafc; font-weight: bold; font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif; letter-spacing: 1px;">
-      <strong>ReAlign: </strong></span>
-      <span style="font-size: 38px; color:#030303; font-weight: bold; font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif; letter-spacing: 0.5px;">
-        <strong>Reconstruct to Better Generate</strong></span><br>
-    <span style="font-size: 32px; color:#111111; font-weight: bold; font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif;">
-      <strong>Bridging the Gap between Multimodal Understanding and Generation</strong></span>                                     
-  <p id="authors"> 
-    <br>
-    <span style="color:#080808; font-family: Gill Sans"><a href="https://horizonwind2004.github.io/" target="_blank" style="font-weight: bold; text-decoration: none; color: inherit;">Ji Xie</a><sup>1</sup>&ensp;</span>
-    <span style="color:#000000; font-family: Gill Sans"><a href="https://people.eecs.berkeley.edu/~trevor/" target="_blank" style="font-weight: bold; text-decoration: none; color: inherit;">Trevor Darrell</a><sup>1</sup>&ensp;</span>  
-    <span style="color:#0c0c0c; font-family: Gill Sans"><a href="https://homes.cs.washington.edu/~lsz/" target="_blank" style="font-weight: bold; text-decoration: none; color: inherit;">Luke Zettlemoyer</a><sup>2</sup>&ensp;</span>  
-    <span style="color:#020202; font-family: Gill Sans"><a href="https://people.eecs.berkeley.edu/~xdwang/" target="_blank" style="font-weight: bold; text-decoration: none; color: inherit;">XuDong Wang</a><sup>1&ensp;*</sup></span>  
-    <br> 
-
-  <span style="color:#656768; font-family: Gill Sans; font-size: 18px"> <sup>1</sup>UC Berkeley&nbsp;&nbsp;<sup>2</sup>University of Washington</span><br>
-  <span style="color:#656768; font-family: Gill Sans; font-size: 18px"> <sup>*</sup>Corresponding Author</span><br>
-  <span style="color:#f50808; font-family: Gill Sans; font-size: 20px"> Official Project Page</span>
-
-  <div class="column has-text-centered">
-    <div class="publication-links">
-      <!-- PDF Link. -->
-      <span class="link-block">
-        <a href="https://arxiv.org/pdf/2412.17910"
-           class="external-link button is-normal is-rounded is-dark">
-          <span class="icon">
-            <svg class="svg-inline--fa fa-file-pdf fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 578 578" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
-          </span>
-          <span>Paper</span>
-        </a>
-      </span>
-      <!-- Code Link. -->
-      <span class="link-block">
-        <a href="https://github.com/HorizonWind2004/ReAlign"
-           class="external-link button is-normal is-rounded is-dark">
-          <span class="icon">
-            <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
-          </span>
-          <span>Code</span>
-          </a>
-      </span>
-      <!-- Model Link. -->
-      <span class="link-block">
-        <a href="https://huggingface.co/horizonwind2004/ReAlign-Harmon-1.5B" class="external-link button is-normal is-rounded is-dark"  target="_blank">
-          <span class="icon">
-            <img src="static/uno_files/ai.svg" alt="SVG Icon" style="width: 18px; height: 18px; background-color: #f5f5f5;">
-          </span>
-          <span>Model</span>
-          </a>
-      </span>
-      <!-- Demo Link. -->
-      <span class="link-block">
-        <a href="https://huggingface.co/spaces/horizonwind2004/ReAlign" class="external-link button is-normal is-rounded is-dark" target="_blank">
-          <span class="icon">
-            <img src="static/uno_files/hf.svg" alt="SVG Icon" style="width: 18px; height: 18px;">
-          </span>
-          <span>Demo</span>
-          </a>
-      </span>
-
+<div class="container">
+  <div class="title-section">
+    <div class="emoji-title">🌸</div>
+    <h1 class="main-title">ReAlign: Towards Unified Language-Image Pretraining</h1>
+    
+    <div class="authors">
+      <a href="https://horizonwind2004.github.io/" target="_blank">Ji Xie</a>, 
+      <a href="https://people.eecs.berkeley.edu/~trevor/" target="_blank">Trevor Darrell</a>, 
+      <a href="https://homes.cs.washington.edu/~lsz/" target="_blank">Luke Zettlemoyer</a>, 
+      <a href="https://people.eecs.berkeley.edu/~xdwang/" target="_blank">XuDong Wang</a>
+    </div>
+    
+    <div class="institution">UC Berkeley, University of Washington</div>
+    
+    <div class="button-group">
+      <a href="https://arxiv.org/pdf/2412.17910" class="btn btn-dark" target="_blank">
+        📄 Paper
+      </a>
+      <a href="https://arxiv.org/abs/2412.17910" class="btn btn-blue" target="_blank">
+        📋 ArXiv
+      </a>
+      <a href="https://github.com/HorizonWind2004/ReAlign" class="btn btn-dark" target="_blank">
+        💻 Code/Models
+      </a>
+      <a href="https://huggingface.co/horizonwind2004/ReAlign-Harmon-1.5B" class="btn btn-orange" target="_blank">
+        🤗 HF Models (Coming Soon)
+      </a>
     </div>
   </div>
-</div>
 
-<!--=================Teasers==========================-->
-<section class="hero is-small">
-  <div class="hero-body" style="background: #fdfdfdfa;width: 100%">
-        <div class="carousel-teaser-container" style="width: 50%; height: 600px; overflow: hidden; margin: 0 auto; align-items: center; justify-content: center;">
-          <div class="carousel-teaser carousel-teaser-scroll-left">
-            <!-- loop1 -->
-            <img src="static/uno_files/teaser/1.png" alt="Image 0" style="height: 550px; width: auto; object-fit: cover; margin: 0 15px;">
-            <img src="static/uno_files/teaser/2.png" alt="Image 0" style="height: 550px; width: auto; object-fit: cover; margin: 0 15px;">
-            <img src="static/uno_files/teaser/3.png" alt="Image 0" style="height: 550px; width: auto; object-fit: cover; margin: 0 15px;">
-            <img src="static/uno_files/teaser/4.png" alt="Image 0" style="height: 550px; width: auto; object-fit: cover; margin: 0 15px;">         
-            <!-- loop2 -->
-            <img src="static/uno_files/teaser/1.png" alt="Image 0" style="height: 550px; width: auto; object-fit: cover; margin: 0 15px;">
-            <img src="static/uno_files/teaser/2.png" alt="Image 0" style="height: 550px; width: auto; object-fit: cover; margin: 0 15px;">
-            <img src="static/uno_files/teaser/3.png" alt="Image 0" style="height: 550px; width: auto; object-fit: cover; margin: 0 15px;">
-            <img src="static/uno_files/teaser/4.png" alt="Image 0" style="height: 550px; width: auto; object-fit: cover; margin: 0 15px;">
-                        
-          </div>
-        </div>
-          
-
-    </div>
-    <div class="teaser_text" style="color:#000000;">
-      <p style="font-size: 20px;">We introduce <b>ReAlign</b>, a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level. With only <b>6×A100 GPUs for 4.5 hours (27 GPU-hours)</b> and <b>8,000 unlabeled images</b>, <b>ReAlign</b> achieves state-of-the-art results on GenEval (<b>0.90</b>) and DPGBench (<b>88.15</b>).</p>
-      <br>
-      <p style="font-size: 20px;">By reconstructing images from their own vision encoder embeddings, unified multimodal models receive dense, semantically grounded supervision—free of captions or paired image-text data. This alignment mechanism effectively bridges the modality gap and improves generation fidelity.</p>  
-      <br>
-      <p style="font-size: 20px;">Despite its simplicity, our approach delivers strong gains for unified multimodal models across generation and editing tasks, outperforming models with significantly larger scale while requiring minimal compute resources.</p>
-    </div>
-</section>
-<div class="content_two">
-<h2 style="text-align:center; color:#000000;"><b>What can ReAlign do?</b></h2>
-<br>
-<div class="video-container" lang="en" title="Video Teaser Section" text-align="center">
-  <video width="960" height="540" controls autoplay muted loop>
-      <source src="static/uno_files/teaser/teaser_medium.mp4" type="video/mp4">
-  </video>
-</div>
-</div>
-<br>
-<div class="content_two">
-  <!-- <div class="hero-body" style="background: #f7fbfb;width: 100%"></div> -->
-  <h2 style="text-align:center; color:#000000;"><b>Abstract</b></h2>
-  <br>
-  <p style="color:#000000;">Unified multimodal models (UMMs) are designed to perform both vision understanding and image generation within a single architecture. While they have achieved strong performance on image-text understanding tasks, their generation capabilities often lag behind, revealing a misalignment between what the model understands and what it can produce. We identify this disconnect as a consequence of sparse and biased text supervision in conventional training.
-
-We propose <b>ReAlign</b> (Reconstruct to Better Generate), a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level. By reconstructing images from their own vision encoder embeddings, UMMs receive dense, semantically grounded supervision—free of captions or paired image-text data. This alignment mechanism effectively bridges the modality gap and improves generation fidelity.
-
-Despite its simplicity, our approach delivers strong gains for unified multimodal models across generation and editing tasks. Applied to a 1.5B parameter UMM, ReAlign achieves state-of-the-art results on GenEval (<b>0.90</b>) and DPGBench (<b>88.15</b>), outperforming models with significantly larger scale. Additionally, our method enhances image editing quality, increasing ImgEdit scores from 3.38 to <b>3.75</b> and GEdit from 6.94 to <b>7.25</b>. More impressively, ReAlign achieves this with modest compute, requiring just 8,000 unlabeled images and <b>6×A100 GPUs for 4.5 hours (27 GPU-hours)</b>.</p>
-</div>
-
-<br>
-<div class="content_two">
-  <!-- <div class="hero-body" style="background: #f7fbfb;width: 100%"></div> -->
-  <h2 style="text-align:center; color:#000000;"><b>How does it work?</b></h2><br>
-  <img class="summary-img" src="static/uno_files/method/method.png" style="width:100%;">
-<br>
-  <p style="color:#000000;">ReAlign implements a self-supervised training paradigm that treats the unified multimodal model as an autoencoder. The model reconstructs images from their own vision encoder embeddings, providing dense supervision that preserves fine-grained visual details that captions often miss.
-
-Unlike conventional text-to-image training that relies on sparse text prompts, ReAlign leverages the rich visual features extracted by the model's understanding vision encoder. This approach bridges the gap between understanding and generation pathways by forcing the model to learn comprehensive visual representations.
-
-The framework is simple yet effective: we feed vision encoder features into the UMM with template prompts like "Describe the image in detail" and train the model to reconstruct the original image. This semantic-level reconstruction provides unbiased supervision that naturally aligns the model's understanding and generation capabilities without requiring any paired image-text data. For more details, please refer to the paper.</p>
-  
-</div>
-<br>
-
-<div class="content_two">
-  <h2 style="text-align:center; color:#000000;"><b>Generation and Editing Results</b></h2><br>
-
-<!-- slider r->l -->
-  <div class="carousel-container">
-  <div class="carousel carousel-scroll-left">
-    <!-- loop1 -->
-     <!-- loop1 -->
-    <img src="static/uno_files/slider/stylize/1.png" alt="Image 1">
-    <img src="static/uno_files/slider/stylize/2.png" alt="Image 2">
-    <img src="static/uno_files/slider/stylize/3.png" alt="Image 3">
-    <img src="static/uno_files/slider/stylize/4.png" alt="Image 4">
-    <img src="static/uno_files/slider/stylize/5.png" alt="Image 5">
-    <img src="static/uno_files/slider/stylize/6.png" alt="Image 6">
-    <img src="static/uno_files/slider/stylize/7.png" alt="Image 7">
-    <!-- loop2 -->
-    <img src="static/uno_files/slider/stylize/1.png" alt="Image 1">
-    <img src="static/uno_files/slider/stylize/2.png" alt="Image 2">
-    <img src="static/uno_files/slider/stylize/3.png" alt="Image 3">
-    <img src="static/uno_files/slider/stylize/4.png" alt="Image 4">
-    <img src="static/uno_files/slider/stylize/5.png" alt="Image 5">
-    <img src="static/uno_files/slider/stylize/6.png" alt="Image 6">
-    <img src="static/uno_files/slider/stylize/7.png" alt="Image 7">
-    
+  <div class="abstract-section">
+    <h2 class="section-title">Abstract</h2>
+    <p class="abstract-text">
+      Unified multimodal models (UMMs) are designed to perform both vision understanding and image generation within a single architecture. While they have achieved strong performance on image-text understanding tasks, their generation capabilities often lag behind, revealing a misalignment between what the model understands and what it can produce. We identify this disconnect as a consequence of sparse and biased text supervision in conventional training. We introduce <strong>ReAlign</strong>, a novel model integrating generative data augmentation, enhanced contrastive learning, and reconstruction regularization to improve vision-language alignment. Our approach significantly outperforms existing models across multiple benchmarks, setting a new state-of-the-art in zero-shot classification and vision-language reasoning.
+    </p>
   </div>
 </div>
-
-<!-- slider l->r -->
-<div class="carousel-container">
-  <div class="carousel carousel-scroll-right">
-    <!-- loop1 -->
-    <img src="static/uno_files/slider/remove/1.png" alt="Image 1">
-    <img src="static/uno_files/slider/remove/2.png" alt="Image 2">
-    <img src="static/uno_files/slider/remove/3.png" alt="Image 3">
-    <img src="static/uno_files/slider/remove/4.png" alt="Image 4">
-    <img src="static/uno_files/slider/remove/5.png" alt="Image 5">
-    <img src="static/uno_files/slider/remove/6.png" alt="Image 6">
-
-    <!-- loop2 -->
-    <img src="static/uno_files/slider/remove/1.png" alt="Image 1">
-    <img src="static/uno_files/slider/remove/2.png" alt="Image 2">
-    <img src="static/uno_files/slider/remove/3.png" alt="Image 3">
-    <img src="static/uno_files/slider/remove/4.png" alt="Image 4">
-    <img src="static/uno_files/slider/remove/5.png" alt="Image 5">
-    <img src="static/uno_files/slider/remove/6.png" alt="Image 6">
-  </div>
-</div>
-
-<!-- slider r->l -->
-<div class="carousel-container">
-  <div class="carousel carousel-scroll-left">
-    <!-- loop1 -->
-    <img src="static/uno_files/slider/human_edit/1.png" alt="Image 1">
-    <img src="static/uno_files/slider/human_edit/2.png" alt="Image 2">
-    <img src="static/uno_files/slider/human_edit/3.png" alt="Image 3">
-    <img src="static/uno_files/slider/human_edit/4.png" alt="Image 4">
-    <img src="static/uno_files/slider/human_edit/5.png" alt="Image 5">
-    <img src="static/uno_files/slider/human_edit/6.png" alt="Image 6">
-    <img src="static/uno_files/slider/human_edit/7.png" alt="Image 7">
-    <img src="static/uno_files/slider/human_edit/8.png" alt="Image 8">
-    
-    <!-- loop2 -->
-    <img src="static/uno_files/slider/human_edit/1.png" alt="Image 1">
-    <img src="static/uno_files/slider/human_edit/2.png" alt="Image 2">
-    <img src="static/uno_files/slider/human_edit/3.png" alt="Image 3">
-    <img src="static/uno_files/slider/human_edit/4.png" alt="Image 4">
-    <img src="static/uno_files/slider/human_edit/5.png" alt="Image 5">
-    <img src="static/uno_files/slider/human_edit/6.png" alt="Image 6">
-    <img src="static/uno_files/slider/human_edit/7.png" alt="Image 7">
-    <img src="static/uno_files/slider/human_edit/8.png" alt="Image 8">
-  </div>
-</div>
-
-<!-- slider l->r -->
-<div class="carousel-container">
-  <div class="carousel carousel-scroll-right">
-    <!-- loop1 -->
-    <img src="static/uno_files/slider/general/1.png" alt="Image 1">
-    <img src="static/uno_files/slider/general/2.png" alt="Image 2">
-    <img src="static/uno_files/slider/general/3.png" alt="Image 3">
-    <img src="static/uno_files/slider/general/4.png" alt="Image 4">
-    <img src="static/uno_files/slider/general/5.png" alt="Image 5">
-    <img src="static/uno_files/slider/general/6.png" alt="Image 6">
-    <img src="static/uno_files/slider/general/7.png" alt="Image 7">
-    <!-- loop2 -->
-    <img src="static/uno_files/slider/general/1.png" alt="Image 1">
-    <img src="static/uno_files/slider/general/2.png" alt="Image 2">
-    <img src="static/uno_files/slider/general/3.png" alt="Image 3">
-    <img src="static/uno_files/slider/general/4.png" alt="Image 4">
-    <img src="static/uno_files/slider/general/5.png" alt="Image 5">
-    <img src="static/uno_files/slider/general/6.png" alt="Image 6">
-    <img src="static/uno_files/slider/general/7.png" alt="Image 7">
-  </div>
-</div>
-
-<!-- slider r->l -->
-<div class="carousel-container">
-  <div class="carousel carousel-scroll-left">
-    <!-- loop1 -->
-    <img src="static/uno_files/slider/add/1.png" alt="Image 1">
-    <img src="static/uno_files/slider/add/2.png" alt="Image 2">    
-    <img src="static/uno_files/slider/add/3.png" alt="Image 3">
-    <img src="static/uno_files/slider/add/4.png" alt="Image 4">
-    <img src="static/uno_files/slider/add/5.png" alt="Image 5">
-    <img src="static/uno_files/slider/add/6.png" alt="Image 6">
-    <!-- loop2 -->
-    <img src="static/uno_files/slider/add/1.png" alt="Image 1">
-    <img src="static/uno_files/slider/add/2.png" alt="Image 2">    
-    <img src="static/uno_files/slider/add/3.png" alt="Image 3">
-    <img src="static/uno_files/slider/add/4.png" alt="Image 4">
-    <img src="static/uno_files/slider/add/5.png" alt="Image 5">
-    <img src="static/uno_files/slider/add/6.png" alt="Image 6">
-  </div>
-</div>
-
-</div>  
-
-<br>
-<div class="content_two">
-  <h2 style="text-align:center; color:#000000;"><b>State-of-the-Art Performance</b></h2>
-  <br>
-  <img class="summary-img" src="static/uno_files/comparison/gpt4o_comparison.png" style="width:100%;">
-  <br> 
-  <p style="color:#000000;">ReAlign achieves state-of-the-art results on GenEval (0.90) and DPGBench (88.15), outperforming models with significantly larger scale. Our 1.5B parameter model surpasses recent works like Janus-Pro, OmniGen2, and BAGEL by substantial margins while requiring minimal computational resources—just 6×A100 GPUs for 4.5 hours and 8,000 unlabeled images.</p>
-
-  <br>
-
-  <h2 style="text-align:center; color:#000000;"><b>Comparison with Previous Methods</b></h2>
-  <br>
-  <img class="summary-img" src="static/uno_files/comparison/emu1.png" style="width:100%;">
-  <br>
-  <br>
-  <img class="summary-img" src="static/uno_files/comparison/sup_emu_edit.png" style="width:100%;">
-  <br>
-   
-</div>  
-
-<div class="content_two">
-  <h2 style="text-align:center; color:#000000;"><b>Disclaimer</b></h2><br>
-  <p style="color:#000000;">
-    We open-source this project for academic research. The vast majority of images 
-    used in this project are either generated or licensed. If you have any concerns, 
-    please contact us, and we will promptly remove any inappropriate content. 
-    Any models based on underlying architectures must adhere to their original licensing terms.
-    <br><br>This research aims to advance the field of unified multimodal models. Users are free to 
-    use this framework for research purposes, provided they comply with local laws and exercise 
-    responsible usage. The developers are not liable for any misuse of the method by users.</p>
-  <br>
-</div>
-
-<div class="content_two">
-  <h3 style="color:#000000;">BibTex</h3><br>
-  <div style="max-width: 800px; margin: 0 auto; background-color: #f5f5f5; padding: 20px; border-radius: 8px;">
-    
-    <p style="color:#000000;"> @article{xie2024realign,<br>
-    &nbsp;&nbsp;title={ReAlign: Reconstruct to Better Generate - Bridging the Gap between Multimodal Understanding and Generation},<br>
-    &nbsp;&nbsp;author={Xie, Ji and Darrell, Trevor and Zettlemoyer, Luke and Wang, XuDong},<br>
-    &nbsp;&nbsp;journal={arXiv preprint arXiv:2412.17910},<br>
-    &nbsp;&nbsp;year={2024},<br>
-    &nbsp;&nbsp;url={https://arxiv.org/abs/2412.17910},<br>
-    } </p>
-  </div>
-</div>
-
-<br>
-<br>
-
-<div style="text-align: center; max-width: 800px; margin: 0 auto;">
-  <script type="text/javascript" id="clustrmaps" 
-    src="//clustrmaps.com/map_v2.js?d=XXZSq68pXQQa3e0c6AAjRSVVarn_uCltQNIII8US5uA&cl=ffffff&w=300&t=tt">
-  </script>
-</div>
-
-
-    <br>
-    <div class="content_two">
-    
-      <p style="text-align: center; color: #000000;" >
-        Thanks to
-        <span class="publication-authors"><a href="https://github.com/bytedance/UNO/tree/gh-pages" target="_blank">UNO</a></span> for the page template.
-      </p>
-    </div>
-    <br>
-
 
 </body>
 </html>
