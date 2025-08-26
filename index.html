@@ -167,49 +167,16 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
-          <h2 class="title is-4">State-of-the-Art Performance</h2>
+          <h2 class="title is-4">State-of-the-Art Performance and Enhanced Editing Capabilities</h2>
           <div class="content has-text-justified" style="color: #363636;">
             <p>
               After only a few training steps, all models post large <strong>zero-shot</strong> gains in generation capability with <em>no loss in vision-understanding accuracy</em>. Our fine-tuned Harmon model, even with just 1.5B parameters, achieves a high score of <strong>0.86</strong> on GenEval and <strong>87.21</strong> on DPGBench, significantly outperforming the previous state-of-the-art models <strong>without any GPT-4o-Image distillation data or reinforcement learning</strong>. The most effective approach is a <em>two-stage strategy</em>: first applying SFT followed by reconstruction tuning, which achieves <strong>0.90</strong> on GenEval and <strong>88.15</strong> on DPGBench.
             </p>
-          </div>
-          <img src="static/files/teaser/main.jpg" alt="Table 1: Benchmark Comparison" style="width: 100%; margin: 20px 0;" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section hero">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full">
-          <h2 class="title is-4">Enhanced Image Editing Capabilities</h2>
-          <div class="content has-text-justified" style="color: #363636;">
             <p>
               We surprisingly discover that, for models with <em>image editing capabilities</em>, our method also significantly improves their editing performance. ReAlign demonstrates consistent improvements across all editing categories, increasing the ImgEdit scores from 3.38 to <strong>3.75</strong> and GEdit from 6.94 to <strong>7.25</strong>, using only <em>1,000 training steps and 8,000 unlabeled images</em>. Our method unlocks the model's inherent editing potential without expensive annotation across various tasks like addition, replacement, stylization and color modification.
             </p>
           </div>
-          <div class="video-container" style="text-align: center; margin: 20px 0;">
-            <video width="80%" controls autoplay muted loop>
-              <source src="static/files/teaser/video.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section hero is-light">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full">
-          <h2 class="title is-4">Compositional Text-to-Image Generation</h2>
-          <div class="content has-text-justified" style="color: #363636;">
-            <p>
-              ReAlign achieves unprecedented performance on compositional T2I generation benchmarks without requiring any T2I generation data. Across cases with <em>multiple objects</em>, <em>complex attributions</em>, and explicit <em>spatial layouts</em>, the baseline often drops entities, mixes attributes, or mis-orders items. Our fine-tuned model maintains correct subjects, bindings, and positions, while preserving small details that the baseline blurs or omits.
-            </p>
-          </div>
-          <img src="static/files/teaser/t2i_result.jpg" alt="Text-to-Image Generation Results" style="width: 100%; margin: 20px 0; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+          <img src="static/files/teaser/main.jpg" alt="Table 1: Benchmark Comparison" style="width: 100%; margin: 20px 0;" />
         </div>
       </div>
     </div>
@@ -226,6 +193,22 @@
             </p>
           </div>
           <img src="static/files/teaser/edit_result.jpg" alt="Image Editing Results" style="width: 100%; margin: 20px 0; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-4">Enhanced Generalizability Across Different Architectures</h2>
+          <div class="content has-text-justified" style="color: #363636;">
+            <p>
+              ReAlign achieves consistent performance gains across different UMM frameworks, showcasing its generalizability. We apply ReAlign to various unified multimodal models including Show-o (AR), Harmon (AR+MAR), OpenUni (AR+Diffusion), and BAGEL (AR+Diffusion). All models demonstrate significant improvements through ReAlign: the most notable improvement is achieved by Harmon-1.5B with 85.7 GenEval score (+12.8). Our method exhibits the most significant gains in <em>Position</em> and <em>Color Attribution</em> tasks, while maintaining correct subjects, bindings, and positions across cases with <em>multiple objects</em>, <em>complex attributions</em>, and explicit <em>spatial layouts</em>.
+            </p>
+          </div>
+          <img src="static/files/teaser/t2i_result.jpg" alt="Text-to-Image Generation Results" style="width: 100%; margin: 20px 0; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
         </div>
       </div>
     </div>
