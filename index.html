@@ -112,23 +112,22 @@
     }
     
     /* Custom styles for the demo gallery */
+    .demo-gallery-container {
+      position: relative;
+    }
+    
     .demo-gallery {
       display: flex;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       gap: 1rem;
-      padding: 1.5rem 0;
+      padding: 1rem 0;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none; /* Firefox */
-      animation: autoScroll 30s linear infinite;
     }
     
     .demo-gallery::-webkit-scrollbar {
       display: none; /* Chrome, Safari, Opera */
-    }
-    
-    .demo-gallery:hover {
-      animation-play-state: paused;
     }
     
     .demo-item {
@@ -137,19 +136,21 @@
       width: 200px;
       height: 200px;
       position: relative;
-      border-radius: 0.75rem;
+      border-radius: 0.5rem;
       overflow: hidden;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       transition: all 0.3s ease;
-    }
-    
-    @keyframes autoScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      cursor: pointer;
     }
     
     .demo-item:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
+      z-index: 10;
+    }
+    
+    .demo-item.active {
+      border: 3px solid #3b82f6;
+      transform: scale(1.02);
     }
     
     .demo-item img {
@@ -158,22 +159,30 @@
       object-fit: cover;
     }
     
-    .demo-prompt {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
+    .demo-prompt-display {
+      margin-top: 1rem;
       padding: 1rem;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
+      background: #f8fafc;
+      border-radius: 0.5rem;
+      border-left: 4px solid #3b82f6;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       font-size: 0.875rem;
-      line-height: 1.25rem;
+      line-height: 1.4;
+      color: #475569;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
     
-    .demo-item:hover .demo-prompt {
-      transform: translateY(0);
+    .demo-prompt-display.active {
+      opacity: 1;
+    }
+    
+    .demo-prompt-display .prompt-text {
+      font-weight: 500;
     }
     
     .placeholder-img {
@@ -278,153 +287,58 @@
     </div>
   </section>
 
-  <!-- Demo Section - Updated with Scrolling Gallery -->
+  <!-- Demo Section - Updated with Auto-scrolling Gallery -->
   <section id="demo" class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-gray-900">Interactive Demo Gallery</h2>
         <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-          Hover over images to see the generation prompts
+          Click on images to see their generation prompts below
         </p>
       </div>
       
-      <div class="relative overflow-hidden">
-        <div class="demo-gallery">
-          <!-- First set of demo items -->
-          <div class="demo-item">
+      <div class="demo-gallery-container">
+        <div class="demo-gallery" id="demoGallery">
+
+          <div class="demo-item" data-prompt="A Van Gogh style painting of a cyberpunk city at sunrise.">
             <img src="static/files/demo/image1.jpg" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A Van Gogh style painting of a cyberpunk city at sunrise.
-            </div>
           </div>
-          <div class="demo-item">
+          <div class="demo-item" data-prompt="A drop of water containing a miniature forest with colorful tiny flower inside.">
             <img src="static/files/demo/image2.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A drop of water containing a miniature forest with colorful tiny flower inside.
-            </div>
           </div>
-          <div class="demo-item">
+          <div class="demo-item" data-prompt="A transparent glass cube on an endless desert, with a burning candle inside casting shadows on the sand.">
             <img src="static/files/demo/image3.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A transparent glass cube on an endless desert, with a burning candle inside casting shadows on the sand.
-            </div>
           </div>
-          <div class="demo-item">
+          <div class="demo-item" data-prompt="A vibrant and traditional depiction of Tteokguk, a Korean rice cake soup, served during the Chuseok festival. The image features a steaming bowl of clear broth filled with soft, chewy rice cakes, slices of zucchini, carrots, and green onions, garnished with a sprinkle of sesame seeds. Surrounding the bowl are traditional Korean elements, such as a woven basket with red dates, a small wooden spoon, and a wooden table with a warm, earthy tone. The atmosphere is cozy and festive, with soft, natural lighting and a slightly blurred background to emphasize the dish. The scene captures the essence of Korean culture and the warmth of the Chuseok celebration, with a focus on authenticity and detail.">
             <img src="static/files/demo/image4.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A vibrant and traditional depiction of Tteokguk, a Korean rice cake soup.
-            </div>
           </div>
-          <div class="demo-item">
+          <div class="demo-item" data-prompt="An anime-style portrait of a girl with big sparkling eyes, detailed hair highlights, soft gradient background, vibrant colors.">
             <img src="static/files/demo/image5.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> An anime-style portrait of a girl with big sparkling eyes, detailed hair highlights, soft gradient background, vibrant colors.
-            </div>
           </div>
-          <div class="demo-item">
+          <div class="demo-item" data-prompt="A dreamy composition of a young woman with butterflies emerging from her skin, wings glowing in soft golden hues, surreal and enchanting. She is wearing a wedding dress and has white angel wings, waving her hand.">
             <img src="static/files/demo/image14.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A dreamy composition of a young woman with butterflies emerging from her skin, wings glowing in soft golden hues.
-            </div>
           </div>
-          <div class="demo-item">
+          <div class="demo-item" data-prompt="A surreal split-face portrait: left side realistic woman with soft skin and a vivid blue eye, right side robotic cyborg with exposed steel plates, fluorescent blue circuits, tiny gears, and a blood-red mechanical eye, cinematic lighting, futuristic and striking.">
             <img src="static/files/demo/image15.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A surreal split-face portrait: left side realistic woman, right side robotic cyborg.
-            </div>
           </div>
-          <div class="demo-item">
+          <div class="demo-item" data-prompt="Photorealistic closeup image of two pirate ships battling each other as they sail inside a cup of coffee.">
             <img src="static/files/demo/image16.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> Photorealistic closeup image of two pirate ships battling each other as they sail inside a cup of coffee.
-            </div>
           </div>
-          <div class="demo-item">
+          <div class="demo-item" data-prompt="A cute handmade felt doll of a little girl standing on a grassy patch. She wears an orange knitted hooded dress with blue buttons and matching boots. The girl is holding a smiling sun-shaped balloon made of felt. Fluffy white clouds with button details float in the sky, and soft green felt trees surround the scene. The style is whimsical, cozy, and playful, with pastel colors and a dreamy, handcrafted aesthetic.">
             <img src="static/files/demo/image17.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A cute handmade felt doll of a little girl standing on a grassy patch.
-            </div>
           </div>
-          <div class="demo-item">
+          <div class="demo-item" data-prompt="The word 'RECA' is written on a street surface, with the word 'STARTS' written just below it, surrounded by colorful chalk drawings and playful doodles.">
             <img src="static/files/demo/image18.jpeg" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> The word 'RECA' is written on a street surface, with the word 'STARTS' written just below it.
-            </div>
           </div>
-          <div class="demo-item">
+          <div class="demo-item" data-prompt="A delicate blossom, a symbol of beauty and renewal in Japan, especially during the spring season.">
             <img src="static/files/demo/image21.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A delicate blossom, a symbol of beauty and renewal in Japan, especially during the spring season.
-            </div>
           </div>
-          
-          <!-- Duplicate set for seamless loop -->
-          <div class="demo-item">
-            <img src="static/files/demo/image1.jpg" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A Van Gogh style painting of a cyberpunk city at sunrise.
-            </div>
-          </div>
-          <div class="demo-item">
-            <img src="static/files/demo/image2.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A drop of water containing a miniature forest with colorful tiny flower inside.
-            </div>
-          </div>
-          <div class="demo-item">
-            <img src="static/files/demo/image3.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A transparent glass cube on an endless desert, with a burning candle inside casting shadows on the sand.
-            </div>
-          </div>
-          <div class="demo-item">
-            <img src="static/files/demo/image4.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A vibrant and traditional depiction of Tteokguk, a Korean rice cake soup.
-            </div>
-          </div>
-          <div class="demo-item">
-            <img src="static/files/demo/image5.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> An anime-style portrait of a girl with big sparkling eyes, detailed hair highlights, soft gradient background, vibrant colors.
-            </div>
-          </div>
-          <div class="demo-item">
-            <img src="static/files/demo/image14.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A dreamy composition of a young woman with butterflies emerging from her skin, wings glowing in soft golden hues.
-            </div>
-          </div>
-          <div class="demo-item">
-            <img src="static/files/demo/image15.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A surreal split-face portrait: left side realistic woman, right side robotic cyborg.
-            </div>
-          </div>
-          <div class="demo-item">
-            <img src="static/files/demo/image16.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> Photorealistic closeup image of two pirate ships battling each other as they sail inside a cup of coffee.
-            </div>
-          </div>
-          <div class="demo-item">
-            <img src="static/files/demo/image17.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A cute handmade felt doll of a little girl standing on a grassy patch.
-            </div>
-          </div>
-          <div class="demo-item">
-            <img src="static/files/demo/image18.jpeg" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> The word 'RECA' is written on a street surface, with the word 'STARTS' written just below it.
-            </div>
-          </div>
-          <div class="demo-item">
-            <img src="static/files/demo/image21.png" alt="">
-            <div class="demo-prompt">
-              <strong>Prompt:</strong> A delicate blossom, a symbol of beauty and renewal in Japan, especially during the spring season.
-            </div>
-          </div>
+
+        </div>
+        
+        <!-- Prompt Display Area -->
+        <div class="demo-prompt-display" id="promptDisplay">
+          <div class="prompt-text">Click on any image above to see its generation prompt</div>
         </div>
       </div>
       
@@ -655,6 +569,52 @@
           behavior: 'smooth'
         });
       });
+    });
+    
+    // Demo gallery functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const demoItems = document.querySelectorAll('.demo-item');
+      const promptDisplay = document.getElementById('promptDisplay');
+      const demoGallery = document.getElementById('demoGallery');
+      
+      // Handle demo item clicks
+      demoItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const prompt = this.getAttribute('data-prompt');
+          
+          // Remove active class from all items
+          demoItems.forEach(i => i.classList.remove('active'));
+          
+          // Add active class to clicked item
+          this.classList.add('active');
+          
+          // Update prompt display
+          promptDisplay.innerHTML = `<div class="prompt-text"><strong>Prompt:</strong> ${prompt}</div>`;
+          promptDisplay.classList.add('active');
+        });
+      });
+      
+      // Auto-scroll functionality
+      let scrollPosition = 0;
+      const scrollSpeed = 1;
+      const maxScroll = demoGallery.scrollWidth - demoGallery.clientWidth;
+      
+      function autoScroll() {
+        if (!demoGallery.matches(':hover')) {
+          scrollPosition += scrollSpeed;
+          
+          if (scrollPosition >= maxScroll) {
+            scrollPosition = 0;
+          }
+          
+          demoGallery.scrollLeft = scrollPosition;
+        }
+        
+        requestAnimationFrame(autoScroll);
+      }
+      
+      // Start auto-scroll
+      autoScroll();
     });
   </script>
 </body>
