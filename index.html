@@ -133,8 +133,8 @@
     .demo-item {
       scroll-snap-align: start;
       flex: 0 0 auto;
-      width: 250px;
-      height: 250px;
+      width: 350px;
+      height: 350px;
       position: relative;
       border-radius: 0.5rem;
       overflow: hidden;
@@ -183,6 +183,111 @@
     
     .demo-prompt-display .prompt-text {
       font-weight: 500;
+    }
+    
+    /* Edit comparison slider styles */
+    .edit-comparison-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .edit-comparison-images {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+    }
+    
+    .edit-original, .edit-result {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .edit-original img, .edit-result img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .edit-result {
+      clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+      transition: clip-path 0.1s ease;
+    }
+    
+    .edit-slider {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: white;
+      cursor: ew-resize;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+    
+    .edit-slider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 2px solid #3b82f6;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .edit-labels {
+      position: absolute;
+      top: 1rem;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 5;
+    }
+    
+    .edit-label {
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .edit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .edit-prompt-area {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #f8fafc;
+      border-radius: 0.5rem;
+      border-left: 4px solid #10b981;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #475569;
+    }
+    
+    .edit-prompt-area .prompt-label {
+      font-weight: 600;
+      color: #10b981;
+      margin-bottom: 0.5rem;
     }
     
     .placeholder-img {
@@ -238,29 +343,37 @@
         </h2>
         
         <!-- Authors -->
-        <div class="mt-8 flex flex-wrap justify-center gap-4">
-          <div class="bg-white/90 rounded-lg shadow-sm px-6 py-3 flex items-center backdrop-blur-sm">
+        <div class="mt-8 flex flex-wrap justify-center gap-6">
+          <div class="bg-white/90 rounded-lg shadow-sm px-8 py-4 flex items-center backdrop-blur-sm">
             <div class="text-center">
-              <p class="text-sm font-medium text-gray-700">Ji Xie<sup>1</sup></p>
-              <p class="text-xs text-gray-500">UC Berkeley</p>
+              <p class="text-base font-medium text-gray-700">
+                <a target="_blank" href="https://horizonwind2004.github.io/" class="text-primary-600 hover:text-primary-800 transition">Ji Xie</a><sup>1</sup>
+              </p>
+              <p class="text-sm text-gray-500">UC Berkeley</p>
             </div>
           </div>
-          <div class="bg-white/90 rounded-lg shadow-sm px-6 py-3 flex items-center backdrop-blur-sm">
+          <div class="bg-white/90 rounded-lg shadow-sm px-8 py-4 flex items-center backdrop-blur-sm">
             <div class="text-center">
-              <p class="text-sm font-medium text-gray-700">Trevor Darrell<sup>1</sup></p>
-              <p class="text-xs text-gray-500">UC Berkeley</p>
+              <p class="text-base font-medium text-gray-700">
+                <a target="_blank" href="https://people.eecs.berkeley.edu/~trevor/" class="text-primary-600 hover:text-primary-800 transition">Trevor Darrell</a><sup>1</sup>
+              </p>
+              <p class="text-sm text-gray-500">UC Berkeley</p>
             </div>
           </div>
-          <div class="bg-white/90 rounded-lg shadow-sm px-6 py-3 flex items-center backdrop-blur-sm">
+          <div class="bg-white/90 rounded-lg shadow-sm px-8 py-4 flex items-center backdrop-blur-sm">
             <div class="text-center">
-              <p class="text-sm font-medium text-gray-700">Luke Zettlemoyer<sup>2</sup></p>
-              <p class="text-xs text-gray-500">University of Washington</p>
+              <p class="text-base font-medium text-gray-700">
+                <a target="_blank" href="https://homes.cs.washington.edu/~lsz/" class="text-primary-600 hover:text-primary-800 transition">Luke Zettlemoyer</a><sup>2</sup>
+              </p>
+              <p class="text-sm text-gray-500">University of Washington</p>
             </div>
           </div>
-          <div class="bg-white/90 rounded-lg shadow-sm px-6 py-3 flex items-center backdrop-blur-sm">
+          <div class="bg-white/90 rounded-lg shadow-sm px-8 py-4 flex items-center backdrop-blur-sm">
             <div class="text-center">
-              <p class="text-sm font-medium text-gray-700">XuDong Wang<sup>1*</sup></p>
-              <p class="text-xs text-gray-500">UC Berkeley</p>
+              <p class="text-base font-medium text-gray-700">
+                <a target="_blank" href="https://people.eecs.berkeley.edu/~xdwang/" class="text-primary-600 hover:text-primary-800 transition">XuDong Wang</a><sup>1*</sup>
+              </p>
+              <p class="text-sm text-gray-500">UC Berkeley</p>
             </div>
           </div>
         </div>
@@ -342,6 +455,164 @@
         </div>
       </div>
       
+      <!-- <div class="mt-8 text-center">
+        <a href="https://huggingface.co/spaces/sanaka87/BAGEL-RecA" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 transition">
+          <i class="fas fa-play-circle mr-2"></i> Try the Live Demo
+        </a>
+      </div> -->
+    </div>
+  </section>
+
+  <!-- Edit Demo Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">Interactive Editing Results</h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+          Drag the slider to compare original images with their edited versions
+        </p>
+      </div>
+      
+      <div class="edit-grid">
+        <!-- Edit Demo 1 -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="edit-comparison-container" data-edit-id="1">
+            <div class="edit-comparison-images">
+              <div class="edit-original">
+                <img src="static/files/edit_demo/ori1.jpg" alt="Original Image 1">
+              </div>
+              <div class="edit-result">
+                <img src="static/files/edit_demo/edit1.png" alt="Edited Image 1">
+              </div>
+              <div class="edit-slider"></div>
+              <div class="edit-labels">
+                <div class="edit-label">Original</div>
+                <div class="edit-label">Edited</div>
+              </div>
+            </div>
+          </div>
+          <div class="edit-prompt-area">
+            <div class="prompt-label">Edit Prompt:</div>
+            <div class="prompt-text">Edit prompt for image 1 will be displayed here</div>
+          </div>
+        </div>
+
+        <!-- Edit Demo 2 -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="edit-comparison-container" data-edit-id="2">
+            <div class="edit-comparison-images">
+              <div class="edit-original">
+                <img src="static/files/edit_demo/ori2.png" alt="Original Image 2">
+              </div>
+              <div class="edit-result">
+                <img src="static/files/edit_demo/edit2.png" alt="Edited Image 2">
+              </div>
+              <div class="edit-slider"></div>
+              <div class="edit-labels">
+                <div class="edit-label">Original</div>
+                <div class="edit-label">Edited</div>
+              </div>
+            </div>
+          </div>
+          <div class="edit-prompt-area">
+            <div class="prompt-label">Edit Prompt:</div>
+            <div class="prompt-text">Edit prompt for image 2 will be displayed here</div>
+          </div>
+        </div>
+
+        <!-- Edit Demo 3 -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="edit-comparison-container" data-edit-id="3">
+            <div class="edit-comparison-images">
+              <div class="edit-original">
+                <img src="static/files/edit_demo/ori3.png" alt="Original Image 3">
+              </div>
+              <div class="edit-result">
+                <img src="static/files/edit_demo/edit3.png" alt="Edited Image 3">
+              </div>
+              <div class="edit-slider"></div>
+              <div class="edit-labels">
+                <div class="edit-label">Original</div>
+                <div class="edit-label">Edited</div>
+              </div>
+            </div>
+          </div>
+          <div class="edit-prompt-area">
+            <div class="prompt-label">Edit Prompt:</div>
+            <div class="prompt-text">Edit prompt for image 3 will be displayed here</div>
+          </div>
+        </div>
+
+        <!-- Edit Demo 4 -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="edit-comparison-container" data-edit-id="4">
+            <div class="edit-comparison-images">
+              <div class="edit-original">
+                <img src="static/files/edit_demo/ori4.png" alt="Original Image 4">
+              </div>
+              <div class="edit-result">
+                <img src="static/files/edit_demo/edit4.png" alt="Edited Image 4">
+              </div>
+              <div class="edit-slider"></div>
+              <div class="edit-labels">
+                <div class="edit-label">Original</div>
+                <div class="edit-label">Edited</div>
+              </div>
+            </div>
+          </div>
+          <div class="edit-prompt-area">
+            <div class="prompt-label">Edit Prompt:</div>
+            <div class="prompt-text">Edit prompt for image 4 will be displayed here</div>
+          </div>
+        </div>
+
+        <!-- Edit Demo 5 -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="edit-comparison-container" data-edit-id="5">
+            <div class="edit-comparison-images">
+              <div class="edit-original">
+                <img src="static/files/edit_demo/ori5.png" alt="Original Image 5">
+              </div>
+              <div class="edit-result">
+                <img src="static/files/edit_demo/edit5.png" alt="Edited Image 5">
+              </div>
+              <div class="edit-slider"></div>
+              <div class="edit-labels">
+                <div class="edit-label">Original</div>
+                <div class="edit-label">Edited</div>
+              </div>
+            </div>
+          </div>
+          <div class="edit-prompt-area">
+            <div class="prompt-label">Edit Prompt:</div>
+            <div class="prompt-text">Edit prompt for image 5 will be displayed here</div>
+          </div>
+        </div>
+
+        <!-- Edit Demo 6 -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="edit-comparison-container" data-edit-id="6">
+            <div class="edit-comparison-images">
+              <div class="edit-original">
+                <img src="static/files/edit_demo/ori6.png" alt="Original Image 6">
+              </div>
+              <div class="edit-result">
+                <img src="static/files/edit_demo/edit6.png" alt="Edited Image 6">
+              </div>
+              <div class="edit-slider"></div>
+              <div class="edit-labels">
+                <div class="edit-label">Original</div>
+                <div class="edit-label">Edited</div>
+              </div>
+            </div>
+          </div>
+          <div class="edit-prompt-area">
+            <div class="prompt-label">Edit Prompt:</div>
+            <div class="prompt-text">Edit prompt for image 6 will be displayed here</div>
+          </div>
+        </div>
+      </div>
+      
       <div class="mt-8 text-center">
         <a href="https://huggingface.co/spaces/sanaka87/BAGEL-RecA" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 transition">
           <i class="fas fa-play-circle mr-2"></i> Try the Live Demo
@@ -361,13 +632,16 @@
       <div class="bg-white rounded-xl shadow-md p-8 max-w-5xl mx-auto">
         <div class="prose-lg text-gray-700">
           <p class="mb-6">
-            Unified multimodal models (UMMs) are designed to perform both vision understanding and image generation within a single architecture. While they have achieved strong performance on image-text understanding tasks, their generation capabilities often lag behind, revealing a misalignment between what the model understands and what it can produce. We identify this disconnect as a consequence of sparse and biased text supervision in conventional training.
+            Unified multimodal models (UMMs) unify visual understanding and generation within a single architecture. However, conventional training relies on image–text pairs (or sequences) whose captions are typically sparse and miss fine-grained visual details—even when they use hundreds of words to describe a simple image.
           </p>
           <p class="mb-6">
-            We propose <span class="font-bold text-primary-600">RecA</span>, a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level. By reconstructing images from their own vision encoder embeddings, UMMs receive dense, semantically grounded supervision—free of captions or paired image-text data. This alignment mechanism effectively bridges the modality gap and improves generation fidelity.
+            We introduce <span class="font-bold text-primary-600">Reconstruction Alignment</span> (<span class="font-bold text-primary-600">RecA</span>), a resource-efficient post-training method that leverages visual understanding encoder embeddings as dense "text prompts," providing rich supervision without captions. Concretely, RecA conditions a UMM on its own visual understanding embeddings and optimizes it to reconstruct the input image with a self-supervised reconstruction loss, thereby realigning understanding and generation.
+          </p>
+          <p class="mb-6">
+            Despite its simplicity, RecA is broadly applicable: across autoregressive, masked-autoregressive, and diffusion-based UMMs, it consistently improves generation and editing fidelity. With only <span class="font-bold text-primary-600">27 GPU-hours</span>, post-training with RecA substantially improves image generation performance on GenEval (<span class="font-bold text-primary-600">0.73→0.90</span>) and DPGBench (<span class="font-bold text-primary-600">80.93→88.15</span>), while also boosting editing benchmarks (ImgEdit <span class="font-bold text-primary-600">3.38→3.75</span>, GEdit <span class="font-bold text-primary-600">6.94→7.25</span>).
           </p>
           <p>
-            Despite its simplicity, our approach delivers strong gains for unified multimodal models across generation and editing tasks. Applied to a 1.5B parameter UMM, RecA achieves state-of-the-art results on GenEval (<span class="font-bold text-primary-600">0.90</span>) and DPGBench (<span class="font-bold text-primary-600">88.15</span>), outperforming models with significantly larger scale. More impressively, RecA achieves this with modest compute, requiring just 8,000 unlabeled images and <span class="font-bold text-primary-600">6×A100 GPUs for 4.5 hours (27 GPU-hours)</span>.
+            Notably, RecA surpasses much larger open-source models and applies broadly across diverse UMM architectures, establishing it as an efficient and general post-training alignment strategy for UMMs.
           </p>
         </div>
       </div>
@@ -590,6 +864,67 @@
           // Update prompt display
           promptDisplay.innerHTML = `<div class="prompt-text"><strong>Prompt:</strong> ${prompt}</div>`;
           promptDisplay.classList.add('active');
+        });
+      });
+      
+      // Edit comparison slider functionality
+      const editContainers = document.querySelectorAll('.edit-comparison-container');
+      
+      editContainers.forEach(container => {
+        const slider = container.querySelector('.edit-slider');
+        const editResult = container.querySelector('.edit-result');
+        const containerRect = container.getBoundingClientRect();
+        let isDragging = false;
+        
+        function updateSliderPosition(clientX) {
+          const rect = container.getBoundingClientRect();
+          const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+          const percentage = (x / rect.width) * 100;
+          
+          // Update slider position
+          slider.style.left = `${percentage}%`;
+          
+          // Update clip-path for the edited image
+          editResult.style.clipPath = `polygon(${percentage}% 0%, 100% 0%, 100% 100%, ${percentage}% 100%)`;
+        }
+        
+        // Mouse events
+        slider.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          e.preventDefault();
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+          if (isDragging) {
+            updateSliderPosition(e.clientX);
+          }
+        });
+        
+        document.addEventListener('mouseup', () => {
+          isDragging = false;
+        });
+        
+        // Touch events for mobile
+        slider.addEventListener('touchstart', (e) => {
+          isDragging = true;
+          e.preventDefault();
+        });
+        
+        document.addEventListener('touchmove', (e) => {
+          if (isDragging && e.touches[0]) {
+            updateSliderPosition(e.touches[0].clientX);
+          }
+        });
+        
+        document.addEventListener('touchend', () => {
+          isDragging = false;
+        });
+        
+        // Click on container to move slider
+        container.addEventListener('click', (e) => {
+          if (!isDragging && e.target !== slider) {
+            updateSliderPosition(e.clientX);
+          }
         });
       });
     });
