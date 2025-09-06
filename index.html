@@ -66,7 +66,26 @@
     }
     
     .hero-pattern {
-      background-image: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.05) 0%, rgba(14, 165, 233, 0.05) 90%, transparent 90%, transparent), radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.05) 0%, rgba(99, 102, 241, 0.05) 90%, transparent 90%, transparent);
+      background-image: url('static/files/teaser/DEMO.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+    
+    .hero-pattern::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 10;
     }
     
     .card-hover {
@@ -87,12 +106,80 @@
       50% { transform: translateY(-15px); }
       100% { transform: translateY(0px); }
     }
+    
+    .text-shadow {
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Custom styles for the demo gallery */
+    .demo-gallery {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+    }
+    
+    .demo-gallery::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+    
+    .demo-item {
+      scroll-snap-align: start;
+      flex: 0 0 auto;
+      width: 300px;
+      height: 300px;
+      position: relative;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+    }
+    
+    .demo-item:hover {
+      transform: scale(1.03);
+    }
+    
+    .demo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .demo-prompt {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 1rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+    
+    .demo-item:hover .demo-prompt {
+      transform: translateY(0);
+    }
+    
+    .placeholder-img {
+      background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      font-weight: 500;
+    }
   </style>
 </head>
 
 <body class="font-sans bg-gray-50 text-gray-800">
   <!-- Navigation -->
-  <nav class="bg-white shadow-sm sticky top-0 z-50">
+  <nav class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex items-center">
@@ -117,41 +204,41 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Section with Demo Background -->
   <section class="hero-pattern py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hero-content">
       <div class="text-center">
         <div class="flex justify-center items-center mb-6">
           <img src="static/files/teaser/logo.png" alt="RecA Logo" class="h-20 w-20 mr-4 animate-float">
-          <h1 class="text-4xl md:text-5xl font-bold text-gray-900">
+          <h1 class="text-4xl md:text-5xl font-bold text-white text-shadow">
             <span class="gradient-text">RecA</span>: Reconstruction Alignment Improves Unified Multimodal Models
           </h1>
         </div>
-        <h2 class="mt-4 text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto">
+        <h2 class="mt-4 text-xl md:text-2xl text-gray-200 max-w-4xl mx-auto text-shadow">
           Unlocking the Massive Zero-shot Potential in Unified Multimodal Models through Self-supervised Learning
         </h2>
         
         <!-- Authors -->
         <div class="mt-8 flex flex-wrap justify-center gap-4">
-          <div class="bg-white rounded-lg shadow-sm px-6 py-3 flex items-center">
+          <div class="bg-white/90 rounded-lg shadow-sm px-6 py-3 flex items-center backdrop-blur-sm">
             <div class="text-center">
               <p class="text-sm font-medium text-gray-700">Ji Xie<sup>1</sup></p>
               <p class="text-xs text-gray-500">UC Berkeley</p>
             </div>
           </div>
-          <div class="bg-white rounded-lg shadow-sm px-6 py-3 flex items-center">
+          <div class="bg-white/90 rounded-lg shadow-sm px-6 py-3 flex items-center backdrop-blur-sm">
             <div class="text-center">
               <p class="text-sm font-medium text-gray-700">Trevor Darrell<sup>1</sup></p>
               <p class="text-xs text-gray-500">UC Berkeley</p>
             </div>
           </div>
-          <div class="bg-white rounded-lg shadow-sm px-6 py-3 flex items-center">
+          <div class="bg-white/90 rounded-lg shadow-sm px-6 py-3 flex items-center backdrop-blur-sm">
             <div class="text-center">
               <p class="text-sm font-medium text-gray-700">Luke Zettlemoyer<sup>2</sup></p>
               <p class="text-xs text-gray-500">University of Washington</p>
             </div>
           </div>
-          <div class="bg-white rounded-lg shadow-sm px-6 py-3 flex items-center">
+          <div class="bg-white/90 rounded-lg shadow-sm px-6 py-3 flex items-center backdrop-blur-sm">
             <div class="text-center">
               <p class="text-sm font-medium text-gray-700">XuDong Wang<sup>1*</sup></p>
               <p class="text-xs text-gray-500">UC Berkeley</p>
@@ -181,17 +268,92 @@
     </div>
   </section>
 
-  <!-- Demo Image -->
+  <!-- Demo Section - Updated with Scrolling Gallery -->
   <section id="demo" class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">Demo Showcase</h2>
+        <h2 class="text-3xl font-bold text-gray-900">Interactive Demo Gallery</h2>
         <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-          See RecA in action with our interactive demo showcasing enhanced multimodal understanding and generation
+          Hover over images to see the generation prompts
         </p>
       </div>
-      <div class="rounded-xl overflow-hidden shadow-xl max-w-5xl mx-auto">
-        <img src="static/files/teaser/DEMO.jpg" alt="RecA Demo" class="w-full h-auto">
+      
+      <div class="relative">
+        <div class="demo-gallery">
+
+          <div class="demo-item">
+            <img src="static/files/demo/image1.jpg" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A Van Gogh style painting of a cyberpunk city at sunrise.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image2.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A drop of water containing a miniature forest with colorful tiny flower inside.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image3.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A transparent glass cube on an endless desert, with a burning candle inside casting shadows on the sand.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image4.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A vibrant and traditional depiction of Tteokguk, a Korean rice cake soup, served during the Chuseok festival. The image features a steaming bowl of clear broth filled with soft, chewy rice cakes, slices of zucchini, carrots, and green onions, garnished with a sprinkle of sesame seeds. Surrounding the bowl are traditional Korean elements, such as a woven basket with red dates, a small wooden spoon, and a wooden table with a warm, earthy tone. The atmosphere is cozy and festive, with soft, natural lighting and a slightly blurred background to emphasize the dish. The scene captures the essence of Korean culture and the warmth of the Chuseok celebration, with a focus on authenticity and detail.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image5.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> An anime-style portrait of a girl with big sparkling eyes, detailed hair highlights, soft gradient background, vibrant colors.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image14.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A dreamy composition of a young woman with butterflies emerging from her skin, wings glowing in soft golden hues, surreal and enchanting. She is wearing a wedding dress and has white angel wings, waving her hand.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image15.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A surreal split-face portrait: left side realistic woman with soft skin and a vivid blue eye, right side robotic cyborg with exposed steel plates, fluorescent blue circuits, tiny gears, and a blood-red mechanical eye, cinematic lighting, futuristic and striking.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image16.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> Photorealistic closeup image of two pirate ships battling each other as they sail inside a cup of coffee.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image17.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A cute handmade felt doll of a little girl standing on a grassy patch. She wears an orange knitted hooded dress with blue buttons and matching boots. The girl is holding a smiling sun-shaped balloon made of felt. Fluffy white clouds with button details float in the sky, and soft green felt trees surround the scene. The style is whimsical, cozy, and playful, with pastel colors and a dreamy, handcrafted aesthetic.
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image18.jpeg" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> The word 'RECA' is written on a street surface, with the word 'STARTS' written just below it, surrounded by colorful chalk drawings and playful doodles.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image21.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A delicate blossom, a symbol of beauty and renewal in Japan, especially during the spring season.
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center">
+        <a href="https://huggingface.co/spaces/sanaka87/BAGEL-RecA" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 transition">
+          <i class="fas fa-play-circle mr-2"></i> Try the Live Demo
+        </a>
       </div>
     </div>
   </section>
