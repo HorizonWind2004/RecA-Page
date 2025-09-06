@@ -116,26 +116,36 @@
       display: flex;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      gap: 1.5rem;
+      gap: 1rem;
       padding: 1.5rem 0;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none; /* Firefox */
+      animation: autoScroll 30s linear infinite;
     }
     
     .demo-gallery::-webkit-scrollbar {
       display: none; /* Chrome, Safari, Opera */
     }
     
+    .demo-gallery:hover {
+      animation-play-state: paused;
+    }
+    
     .demo-item {
       scroll-snap-align: start;
       flex: 0 0 auto;
-      width: 300px;
-      height: 300px;
+      width: 200px;
+      height: 200px;
       position: relative;
       border-radius: 0.75rem;
       overflow: hidden;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       transition: all 0.3s ease;
+    }
+    
+    @keyframes autoScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
     
     .demo-item:hover {
@@ -278,9 +288,9 @@
         </p>
       </div>
       
-      <div class="relative">
+      <div class="relative overflow-hidden">
         <div class="demo-gallery">
-
+          <!-- First set of demo items -->
           <div class="demo-item">
             <img src="static/files/demo/image1.jpg" alt="">
             <div class="demo-prompt">
@@ -302,7 +312,7 @@
           <div class="demo-item">
             <img src="static/files/demo/image4.png" alt="">
             <div class="demo-prompt">
-              <strong>Prompt:</strong> A vibrant and traditional depiction of Tteokguk, a Korean rice cake soup, served during the Chuseok festival. The image features a steaming bowl of clear broth filled with soft, chewy rice cakes, slices of zucchini, carrots, and green onions, garnished with a sprinkle of sesame seeds. Surrounding the bowl are traditional Korean elements, such as a woven basket with red dates, a small wooden spoon, and a wooden table with a warm, earthy tone. The atmosphere is cozy and festive, with soft, natural lighting and a slightly blurred background to emphasize the dish. The scene captures the essence of Korean culture and the warmth of the Chuseok celebration, with a focus on authenticity and detail.
+              <strong>Prompt:</strong> A vibrant and traditional depiction of Tteokguk, a Korean rice cake soup.
             </div>
           </div>
           <div class="demo-item">
@@ -314,13 +324,13 @@
           <div class="demo-item">
             <img src="static/files/demo/image14.png" alt="">
             <div class="demo-prompt">
-              <strong>Prompt:</strong> A dreamy composition of a young woman with butterflies emerging from her skin, wings glowing in soft golden hues, surreal and enchanting. She is wearing a wedding dress and has white angel wings, waving her hand.
+              <strong>Prompt:</strong> A dreamy composition of a young woman with butterflies emerging from her skin, wings glowing in soft golden hues.
             </div>
           </div>
           <div class="demo-item">
             <img src="static/files/demo/image15.png" alt="">
             <div class="demo-prompt">
-              <strong>Prompt:</strong> A surreal split-face portrait: left side realistic woman with soft skin and a vivid blue eye, right side robotic cyborg with exposed steel plates, fluorescent blue circuits, tiny gears, and a blood-red mechanical eye, cinematic lighting, futuristic and striking.
+              <strong>Prompt:</strong> A surreal split-face portrait: left side realistic woman, right side robotic cyborg.
             </div>
           </div>
           <div class="demo-item">
@@ -332,12 +342,13 @@
           <div class="demo-item">
             <img src="static/files/demo/image17.png" alt="">
             <div class="demo-prompt">
-              <strong>Prompt:</strong> A cute handmade felt doll of a little girl standing on a grassy patch. She wears an orange knitted hooded dress with blue buttons and matching boots. The girl is holding a smiling sun-shaped balloon made of felt. Fluffy white clouds with button details float in the sky, and soft green felt trees surround the scene. The style is whimsical, cozy, and playful, with pastel colors and a dreamy, handcrafted aesthetic.
+              <strong>Prompt:</strong> A cute handmade felt doll of a little girl standing on a grassy patch.
+            </div>
           </div>
           <div class="demo-item">
             <img src="static/files/demo/image18.jpeg" alt="">
             <div class="demo-prompt">
-              <strong>Prompt:</strong> The word 'RECA' is written on a street surface, with the word 'STARTS' written just below it, surrounded by colorful chalk drawings and playful doodles.
+              <strong>Prompt:</strong> The word 'RECA' is written on a street surface, with the word 'STARTS' written just below it.
             </div>
           </div>
           <div class="demo-item">
@@ -346,7 +357,74 @@
               <strong>Prompt:</strong> A delicate blossom, a symbol of beauty and renewal in Japan, especially during the spring season.
             </div>
           </div>
-
+          
+          <!-- Duplicate set for seamless loop -->
+          <div class="demo-item">
+            <img src="static/files/demo/image1.jpg" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A Van Gogh style painting of a cyberpunk city at sunrise.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image2.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A drop of water containing a miniature forest with colorful tiny flower inside.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image3.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A transparent glass cube on an endless desert, with a burning candle inside casting shadows on the sand.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image4.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A vibrant and traditional depiction of Tteokguk, a Korean rice cake soup.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image5.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> An anime-style portrait of a girl with big sparkling eyes, detailed hair highlights, soft gradient background, vibrant colors.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image14.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A dreamy composition of a young woman with butterflies emerging from her skin, wings glowing in soft golden hues.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image15.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A surreal split-face portrait: left side realistic woman, right side robotic cyborg.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image16.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> Photorealistic closeup image of two pirate ships battling each other as they sail inside a cup of coffee.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image17.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A cute handmade felt doll of a little girl standing on a grassy patch.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image18.jpeg" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> The word 'RECA' is written on a street surface, with the word 'STARTS' written just below it.
+            </div>
+          </div>
+          <div class="demo-item">
+            <img src="static/files/demo/image21.png" alt="">
+            <div class="demo-prompt">
+              <strong>Prompt:</strong> A delicate blossom, a symbol of beauty and renewal in Japan, especially during the spring season.
+            </div>
+          </div>
         </div>
       </div>
       
