@@ -1,235 +1,421 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="description" content="ReAlign: Reconstruction Alignment Improves Unified Multimodal Models" />
-  <meta property="og:title" content="ReAlign: Reconstruction Alignment Improves Unified Multimodal Models" />
-  <meta property="og:description"
-    content="Introducing ReAlign, a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level." />
-  <meta property="og:url" content="https://horizonwind2004.github.io/ReAlign-Page" />
-  <meta name="twitter:title" content="ReAlign: Reconstruction Alignment Improves Unified Multimodal Models" />
-  <meta name="twitter:description"
-    content="Introducing ReAlign, a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level." />
-  <meta name="keywords" content="ReAlign, Vision-Language, Multimodal, Image Generation, AI, Machine Learning" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>ReAlign: Reconstruction Alignment Improves Unified Multimodal Models</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RecA: Reconstruction Alignment Improves Unified Multimodal Models">
+  <meta property="og:title" content="RecA: Reconstruction Alignment Improves Unified Multimodal Models">
+  <meta property="og:description" content="Introducing RecA, a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level.">
+  <meta property="og:url" content="https://horizonwind2004.github.io/RecA-Page">
+  <meta name="twitter:title" content="RecA: Reconstruction Alignment Improves Unified Multimodal Models">
+  <meta name="twitter:description" content="Introducing RecA, a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level.">
+  <meta name="keywords" content="RecA, Vision-Language, Multimodal, Image Generation, AI, Machine Learning">
+  
+  <title>RecA: Reconstruction Alignment Improves Unified Multimodal Models</title>
+  
   <link rel="icon" type="image/png" href="static/files/teaser/logo.png">
   <link rel="shortcut icon" href="static/files/teaser/logo.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/style.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+            secondary: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              300: '#cbd5e1',
+              400: '#94a3b8',
+              500: '#64748b',
+              600: '#475569',
+              700: '#334155',
+              800: '#1e293b',
+              900: '#0f172a',
+            },
+          },
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    .gradient-text {
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .hero-pattern {
+      background-image: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.05) 0%, rgba(14, 165, 233, 0.05) 90%, transparent 90%, transparent), radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.05) 0%, rgba(99, 102, 241, 0.05) 90%, transparent 90%, transparent);
+    }
+    
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
 </head>
 
-<body>
+<body class="font-sans bg-gray-50 text-gray-800">
+  <!-- Navigation -->
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <img src="static/files/teaser/logo.png" alt="RecA Logo" class="h-8 w-8 mr-2">
+          <span class="text-xl font-semibold text-gray-900">RecA</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#abstract" class="text-gray-700 hover:text-primary-600 transition">Abstract</a>
+          <a href="#approach" class="text-gray-700 hover:text-primary-600 transition">Approach</a>
+          <a href="#results" class="text-gray-700 hover:text-primary-600 transition">Results</a>
+          <a href="#demo" class="text-gray-700 hover:text-primary-600 transition">Demo</a>
+        </div>
+        <div class="flex items-center md:hidden">
+          <!-- Mobile menu button -->
+          <button class="text-gray-500 hover:text-gray-900 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1"><img src="static/files/teaser/logo.png" style="width: 80px; height: 80px; margin-right: 20px; vertical-align: middle;" /> ReAlign: Reconstruction Alignment Improves Unified Multimodal Models</h1>
-            <h2 class="subtitle is-4" style="color: #7f8c8d; margin-top: 10px;">Unlocking the Massive Zero-shot Potential in Unified Multimodal Models through Self-supervised Learning</h2>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block" style="color: #363636;">
-                <a target="_blank" href="https://horizonwind2004.github.io/" style="color: #3273dc;">Ji Xie</a><sup>1</sup>,</span>
-              <span class="author-block" style="color: #363636;">
-                <a target="_blank" href="https://people.eecs.berkeley.edu/~trevor/" style="color: #3273dc;">Trevor Darrell</a><sup>1</sup>,</span>
-              <span class="author-block" style="color: #363636;">
-                <a target="_blank" href="https://homes.cs.washington.edu/~lsz/" style="color: #3273dc;">Luke Zettlemoyer</a><sup>2</sup>,</span>
-              <span class="author-block" style="color: #363636;">
-                <a target="_blank" href="https://people.eecs.berkeley.edu/~xdwang/" style="color: #3273dc;">XuDong Wang</a><sup>1*</sup>
-              </span>
+  <!-- Hero Section -->
+  <section class="hero-pattern py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <div class="flex justify-center items-center mb-6">
+          <img src="static/files/teaser/logo.png" alt="RecA Logo" class="h-20 w-20 mr-4 animate-float">
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900">
+            <span class="gradient-text">RecA</span>: Reconstruction Alignment Improves Unified Multimodal Models
+          </h1>
+        </div>
+        <h2 class="mt-4 text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto">
+          Unlocking the Massive Zero-shot Potential in Unified Multimodal Models through Self-supervised Learning
+        </h2>
+        
+        <!-- Authors -->
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+          <div class="bg-white rounded-lg shadow-sm px-6 py-3 flex items-center">
+            <div class="text-center">
+              <p class="text-sm font-medium text-gray-700">Ji Xie<sup>1</sup></p>
+              <p class="text-xs text-gray-500">UC Berkeley</p>
             </div>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block" style="color: #363636;"><sup>1</sup>UC Berkeley&nbsp;&nbsp;<sup>2</sup>University of Washington</span>
+          </div>
+          <div class="bg-white rounded-lg shadow-sm px-6 py-3 flex items-center">
+            <div class="text-center">
+              <p class="text-sm font-medium text-gray-700">Trevor Darrell<sup>1</sup></p>
+              <p class="text-xs text-gray-500">UC Berkeley</p>
             </div>
-            <div class="is-size-6 publication-authors">
-              <span class="author-block" style="color: #363636;"><sup>*</sup>Corresponding Author</span>
+          </div>
+          <div class="bg-white rounded-lg shadow-sm px-6 py-3 flex items-center">
+            <div class="text-center">
+              <p class="text-sm font-medium text-gray-700">Luke Zettlemoyer<sup>2</sup></p>
+              <p class="text-xs text-gray-500">University of Washington</p>
             </div>
-
-            <div class="column has-text-centered">
-              <div class="publication-links">
-                <span class="link-block">
-                  <a href="https://arxiv.org/pdf/2412.17910" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                    <span>Paper</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/2412.17910" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="ai ai-arxiv"></i></span>
-                    <span>ArXiv</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://github.com/HorizonWind2004/ReAlign" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fab fa-github"></i></span>
-                    <span>Code/Models</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://huggingface.co/collections/sanaka87/realign-68ad2176380355a3dcedc068" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">🤗</span>
-                    <span>HF Models</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://huggingface.co/spaces/sanaka87/BAGEL-ReAlign" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">🔥</span>
-                    <span>Demo (BAGEL)</span>
-                  </a>
-                </span>
-              </div>
+          </div>
+          <div class="bg-white rounded-lg shadow-sm px-6 py-3 flex items-center">
+            <div class="text-center">
+              <p class="text-sm font-medium text-gray-700">XuDong Wang<sup>1*</sup></p>
+              <p class="text-xs text-gray-500">UC Berkeley</p>
             </div>
-
-            <!-- Demo Image -->
-            <div style="text-align: center; margin: 30px 0;">
-              <img src="static/files/teaser/DEMO.jpg" 
-                   alt="ReAlign Demo" 
-                   style="width: 90%; height: auto; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);" />
-            </div>
-
           </div>
+        </div>
+        
+        <!-- Links -->
+        <div class="mt-10 flex flex-wrap justify-center gap-4">
+          <a href="https://arxiv.org/pdf/2412.17910" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 transition">
+            <i class="fas fa-file-pdf mr-2"></i> Paper
+          </a>
+          <a href="https://arxiv.org/abs/2412.17910" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-900 transition">
+            <i class="fas fa-book-open mr-2"></i> ArXiv
+          </a>
+          <a href="https://github.com/HorizonWind2004/RecA" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-900 transition">
+            <i class="fab fa-github mr-2"></i> Code/Models
+          </a>
+          <a href="https://huggingface.co/collections/sanaka87/reca-68ad2176380355a3dcedc068" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 transition">
+            <i class="fas fa-robot mr-2"></i> HF Models
+          </a>
+          <a href="https://huggingface.co/spaces/sanaka87/BAGEL-RecA" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 transition">
+            <i class="fas fa-play-circle mr-2"></i> Demo (BAGEL)
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section hero is-light">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <p>
-              Unified multimodal models (UMMs) are designed to perform both vision understanding and image generation within a single architecture. While they have achieved strong performance on image-text understanding tasks, their generation capabilities often lag behind, revealing a misalignment between what the model understands and what it can produce. We identify this disconnect as a consequence of sparse and biased text supervision in conventional training.
-            </p>
-            <p>
-              We propose <strong>ReAlign</strong>, a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level. By reconstructing images from their own vision encoder embeddings, UMMs receive dense, semantically grounded supervision—free of captions or paired image-text data. This alignment mechanism effectively bridges the modality gap and improves generation fidelity.
-            </p>
-            <p>
-              Despite its simplicity, our approach delivers strong gains for unified multimodal models across generation and editing tasks. Applied to a 1.5B parameter UMM, ReAlign achieves state-of-the-art results on GenEval (<strong>0.90</strong>) and DPGBench (<strong>88.15</strong>), outperforming models with significantly larger scale. More impressively, ReAlign achieves this with modest compute, requiring just 8,000 unlabeled images and <strong>6×A100 GPUs for 4.5 hours (27 GPU-hours)</strong>.
-            </p>
-          </div>
+  <!-- Demo Image -->
+  <section id="demo" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">Demo Showcase</h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+          See RecA in action with our interactive demo showcasing enhanced multimodal understanding and generation
+        </p>
+      </div>
+      <div class="rounded-xl overflow-hidden shadow-xl max-w-5xl mx-auto">
+        <img src="static/files/teaser/DEMO.jpg" alt="RecA Demo" class="w-full h-auto">
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract Section -->
+  <section id="abstract" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">Abstract</h2>
+        <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
+      </div>
+      
+      <div class="bg-white rounded-xl shadow-md p-8 max-w-5xl mx-auto">
+        <div class="prose-lg text-gray-700">
+          <p class="mb-6">
+            Unified multimodal models (UMMs) are designed to perform both vision understanding and image generation within a single architecture. While they have achieved strong performance on image-text understanding tasks, their generation capabilities often lag behind, revealing a misalignment between what the model understands and what it can produce. We identify this disconnect as a consequence of sparse and biased text supervision in conventional training.
+          </p>
+          <p class="mb-6">
+            We propose <span class="font-bold text-primary-600">RecA</span>, a self-supervised training framework that aligns understanding and generation through image reconstruction at the semantic level. By reconstructing images from their own vision encoder embeddings, UMMs receive dense, semantically grounded supervision—free of captions or paired image-text data. This alignment mechanism effectively bridges the modality gap and improves generation fidelity.
+          </p>
+          <p>
+            Despite its simplicity, our approach delivers strong gains for unified multimodal models across generation and editing tasks. Applied to a 1.5B parameter UMM, RecA achieves state-of-the-art results on GenEval (<span class="font-bold text-primary-600">0.90</span>) and DPGBench (<span class="font-bold text-primary-600">88.15</span>), outperforming models with significantly larger scale. More impressively, RecA achieves this with modest compute, requiring just 8,000 unlabeled images and <span class="font-bold text-primary-600">6×A100 GPUs for 4.5 hours (27 GPU-hours)</span>.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section hero">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full">
-          <h2 class="title is-4">Teaser</h2>
-          <div class="content has-text-justified" style="color: #363636;">
-            <p>
-              ReAlign demonstrates remarkable improvements in multimodal understanding and generation capabilities through our novel reconstruction alignment approach.
-            </p>
-          </div>
-          <div style="text-align: center; margin: 20px 0;">
-            <img src="static/files/teaser/teaser.jpg" alt="ReAlign Teaser" style="width: 90%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
-          </div>
+  <!-- Teaser Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">Teaser</h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+          RecA demonstrates remarkable improvements in multimodal understanding and generation capabilities
+        </p>
+      </div>
+      
+      <div class="bg-gray-50 rounded-xl p-6 max-w-5xl mx-auto">
+        <img src="static/files/teaser/teaser.jpg" alt="RecA Teaser" class="w-full h-auto rounded-lg shadow-md">
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach Section -->
+  <section id="approach" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">RecA: Semantic-Level Image Reconstruction</h2>
+        <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">The Challenge</h3>
+          <p class="text-gray-700 mb-4">
+            As shown in the figure, longer captions capture more details but still cannot fully represent the original image, missing the detailed <span class="font-medium text-primary-600">overall layouts, object shapes, instance attributes, etc</span>.
+          </p>
+          <p class="text-gray-700">
+            Vision embeddings from the understanding vision encoder are already mapped into the UMM's space while retaining richer visual information. <span class="font-medium italic">Can we prompt the UMMs with embeddings from visual understanding models to close this information gap?</span>
+          </p>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Our Solution</h3>
+          <p class="text-gray-700">
+            RecA implements a self-supervised training paradigm where a <span class="font-medium">understanding</span> vision encoder extracts features from the input image; these features are fused with template text embeddings and fed into a Unified Multimodal Model (UMM) to regenerate the image.
+          </p>
+          <p class="text-gray-700 mt-4">
+            We use the self-supervised loss between the original and generated images to optimize the UMM, providing dense supervision that preserves almost all fine-grained details that captions omit.
+          </p>
+        </div>
+      </div>
+      
+      <div class="mt-12 bg-white rounded-xl shadow-md p-6 max-w-5xl mx-auto">
+        <img src="static/files/teaser/pipeline.jpg" alt="Figure 1: RecA Pipeline Overview" class="w-full h-auto rounded-lg">
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section id="results" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">State-of-the-Art Performance</h2>
+        <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
+      </div>
+      
+      <div class="bg-gray-50 rounded-xl shadow-md p-8 max-w-5xl mx-auto">
+        <div class="prose-lg text-gray-700">
+          <p class="mb-6">
+            After only a few training steps, all models post large <span class="font-bold text-primary-600">zero-shot</span> gains in generation capability with <span class="italic">no loss in vision-understanding accuracy</span>. Our fine-tuned Harmon model, even with just 1.5B parameters, achieves a high score of <span class="font-bold text-primary-600">0.86</span> on GenEval and <span class="font-bold text-primary-600">87.21</span> on DPGBench, significantly outperforming the previous state-of-the-art models <span class="font-bold">without any GPT-4o-Image distillation data or reinforcement learning</span>.
+          </p>
+          <p>
+            The most effective approach is a <span class="italic">two-stage strategy</span>: first applying SFT followed by reconstruction tuning, which achieves <span class="font-bold text-primary-600">0.90</span> on GenEval and <span class="font-bold text-primary-600">88.15</span> on DPGBench.
+          </p>
+        </div>
+        
+        <div class="mt-10">
+          <img src="static/files/teaser/main.jpg" alt="Table 1: Benchmark Comparison" class="w-full h-auto rounded-lg shadow-sm">
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section hero">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full">
-          <h2 class="title is-4">ReAlign: Semantic-Level Image Reconstruction</h2>
-          <div class="content has-text-justified" style="color: #363636;">
-            <p>
-              As shown in the figure, longer captions capture more details but still cannot fully represent the original image, missing the detailed <em><strong>overall layouts, object shapes, instance attributes, etc</strong></em>. Vision embeddings from the understanding vision encoder are already mapped into the UMM's space while retaining richer visual information. <em>Can we prompt the UMMs with embeddings from visual understanding models to close this information gap?</em>
-            </p>
-            <p>
-              ReAlign implements a self-supervised training paradigm where a <em>understanding</em> vision encoder extracts features from the input image; these features are fused with template text embeddings and fed into a Unified Multimodal Model (UMM) to regenerate the image. We use the self-supervised loss (either diffusion loss or cross-entropy loss) between the original and generated images to optimize the UMM, providing dense supervision that preserves almost all fine-grained details that captions omit.
-            </p>
-          </div>
-          <img src="static/files/teaser/pipeline.jpg" alt="Figure 1: ReAlign Pipeline Overview" style="width: 100%; margin: 20px 0;" />
+  <!-- Enhanced Editing Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">Enhanced Editing Capabilities</h2>
+        <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
+      </div>
+      
+      <div class="bg-white rounded-xl shadow-md p-8 max-w-5xl mx-auto">
+        <div class="prose-lg text-gray-700">
+          <p class="mb-6">
+            We surprisingly discover that, for models with <span class="italic">image editing capabilities</span>, our method also significantly improves their editing performance. RecA demonstrates consistent improvements across all editing categories, increasing the ImgEdit scores from 3.38 to <span class="font-bold text-primary-600">3.75</span> and GEdit from 6.94 to <span class="font-bold text-primary-600">7.25</span>, using only <span class="italic">1,000 training steps and 8,000 unlabeled images</span>.
+          </p>
+          <p>
+            Our method unlocks the model's inherent editing potential without expensive annotation across various tasks like addition, replacement, stylization and color modification.
+          </p>
+        </div>
+        
+        <div class="mt-10">
+          <img src="static/files/teaser/edit_result.jpg" alt="Image Editing Results" class="w-full h-auto rounded-lg shadow-sm">
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section hero is-light">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full">
-          <h2 class="title is-4">State-of-the-Art Performance and Enhanced Editing Capabilities</h2>
-          <div class="content has-text-justified" style="color: #363636;">
-            <p>
-              After only a few training steps, all models post large <strong>zero-shot</strong> gains in generation capability with <em>no loss in vision-understanding accuracy</em>. Our fine-tuned Harmon model, even with just 1.5B parameters, achieves a high score of <strong>0.86</strong> on GenEval and <strong>87.21</strong> on DPGBench, significantly outperforming the previous state-of-the-art models <strong>without any GPT-4o-Image distillation data or reinforcement learning</strong>. The most effective approach is a <em>two-stage strategy</em>: first applying SFT followed by reconstruction tuning, which achieves <strong>0.90</strong> on GenEval and <strong>88.15</strong> on DPGBench.
-            </p>
-            <p>
-              We surprisingly discover that, for models with <em>image editing capabilities</em>, our method also significantly improves their editing performance. ReAlign demonstrates consistent improvements across all editing categories, increasing the ImgEdit scores from 3.38 to <strong>3.75</strong> and GEdit from 6.94 to <strong>7.25</strong>, using only <em>1,000 training steps and 8,000 unlabeled images</em>. Our method unlocks the model's inherent editing potential without expensive annotation across various tasks like addition, replacement, stylization and color modification.
-            </p>
-          </div>
-          <img src="static/files/teaser/main.jpg" alt="Table 1: Benchmark Comparison" style="width: 100%; margin: 20px 0;" />
-          <img src="static/files/teaser/edit_result.jpg" alt="Image Editing Results" style="width: 100%; margin: 20px 0; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
-
+  <!-- Generalizability Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">Enhanced Generalizability</h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+          Across Different Architectures and Tasks
+        </p>
+      </div>
+      
+      <div class="bg-gray-50 rounded-xl shadow-md p-8 max-w-5xl mx-auto">
+        <div class="prose-lg text-gray-700">
+          <p class="mb-6">
+            RecA achieves consistent performance gains across different UMM frameworks, showcasing its generalizability. We apply RecA to various unified multimodal models including Show-o (AR), Harmon (AR+MAR), OpenUni (AR+Diffusion), and BAGEL (AR+Diffusion).
+          </p>
+          <p class="mb-6">
+            All models demonstrate significant improvements through RecA: the most notable improvement is achieved by Harmon-1.5B with 85.7 GenEval score (+12.8). Our method exhibits the most significant gains in <span class="font-medium">Position</span> and <span class="font-medium">Color Attribution</span> tasks, while maintaining correct subjects, bindings, and positions across cases with <span class="italic">multiple objects</span>, <span class="italic">complex attributions</span>, and explicit <span class="italic">spatial layouts</span>.
+          </p>
+        </div>
+        
+        <div class="mt-10">
+          <img src="static/files/teaser/t2i_result.jpg" alt="Text-to-Image Generation Results" class="w-full h-auto rounded-lg shadow-sm">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- <section class="section hero">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full">
-          <h2 class="title is-4">Robust Image Editing Results</h2>
-          <div class="content has-text-justified" style="color: #363636;">
-            <p>
-              ReAlign demonstrates persistent gains in various editing tasks including addition, replacement, stylization and color modification. Our approach achieves superior performance in image editing tasks, enabling precise modifications while preserving the overall image quality and maintaining coherent visual structure. The method shows remarkable robustness against benchmark-specific overfitting compared to traditional supervised fine-tuning approaches.
-            </p>
-          </div>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="flex items-center mb-6 md:mb-0">
+          <img src="static/files/teaser/logo.png" alt="RecA Logo" class="h-10 w-10 mr-3">
+          <span class="text-xl font-semibold">RecA</span>
+        </div>
+        
+        <div class="flex space-x-6">
+          <a href="https://arxiv.org/pdf/2412.17910" target="_blank" class="text-gray-300 hover:text-white transition">
+            <i class="fas fa-file-pdf text-xl"></i>
+          </a>
+          <a href="https://arxiv.org/abs/2412.17910" target="_blank" class="text-gray-300 hover:text-white transition">
+            <i class="fas fa-book-open text-xl"></i>
+          </a>
+          <a href="https://github.com/HorizonWind2004/RecA" target="_blank" class="text-gray-300 hover:text-white transition">
+            <i class="fab fa-github text-xl"></i>
+          </a>
+          <a href="https://huggingface.co/collections/sanaka87/reca-68ad2176380355a3dcedc068" target="_blank" class="text-gray-300 hover:text-white transition">
+            <i class="fas fa-robot text-xl"></i>
+          </a>
         </div>
       </div>
-    </div>
-  </section> -->
-
-  <section class="section hero is-light">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full">
-          <h2 class="title is-4">Enhanced Generalizability Across Different Architectures</h2>
-          <div class="content has-text-justified" style="color: #363636;">
-            <p>
-              ReAlign achieves consistent performance gains across different UMM frameworks, showcasing its generalizability. We apply ReAlign to various unified multimodal models including Show-o (AR), Harmon (AR+MAR), OpenUni (AR+Diffusion), and BAGEL (AR+Diffusion). All models demonstrate significant improvements through ReAlign: the most notable improvement is achieved by Harmon-1.5B with 85.7 GenEval score (+12.8). Our method exhibits the most significant gains in <em>Position</em> and <em>Color Attribution</em> tasks, while maintaining correct subjects, bindings, and positions across cases with <em>multiple objects</em>, <em>complex attributions</em>, and explicit <em>spatial layouts</em>.
-            </p>
-          </div>
-          <img src="static/files/teaser/t2i_result.jpg" alt="Text-to-Image Generation Results" style="width: 100%; margin: 20px 0; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
-        </div>
+      
+      <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+        <p>© 2024 RecA Research Team. All rights reserved.</p>
       </div>
     </div>
-  </section>
+  </footer>
 
-  <!--BibTex citation -->
+  <!-- Back to top button -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary-600 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
-  <!--End BibTex citation -->
-
+  <script>
+    // Back to top button
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
 </body>
-
 </html>
