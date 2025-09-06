@@ -133,8 +133,8 @@
     .demo-item {
       scroll-snap-align: start;
       flex: 0 0 auto;
-      width: 200px;
-      height: 200px;
+      width: 250px;
+      height: 250px;
       position: relative;
       border-radius: 0.5rem;
       overflow: hidden;
@@ -291,7 +291,7 @@
   <section id="demo" class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">Interactive Demo Gallery</h2>
+        <h2 class="text-3xl font-bold text-gray-900"> Gallery</h2>
         <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
           Click on images to see their generation prompts below
         </p>
@@ -575,7 +575,6 @@
     document.addEventListener('DOMContentLoaded', function() {
       const demoItems = document.querySelectorAll('.demo-item');
       const promptDisplay = document.getElementById('promptDisplay');
-      const demoGallery = document.getElementById('demoGallery');
       
       // Handle demo item clicks
       demoItems.forEach(item => {
@@ -593,28 +592,6 @@
           promptDisplay.classList.add('active');
         });
       });
-      
-      // Auto-scroll functionality
-      let scrollPosition = 0;
-      const scrollSpeed = 1;
-      const maxScroll = demoGallery.scrollWidth - demoGallery.clientWidth;
-      
-      function autoScroll() {
-        if (!demoGallery.matches(':hover')) {
-          scrollPosition += scrollSpeed;
-          
-          if (scrollPosition >= maxScroll) {
-            scrollPosition = 0;
-          }
-          
-          demoGallery.scrollLeft = scrollPosition;
-        }
-        
-        requestAnimationFrame(autoScroll);
-      }
-      
-      // Start auto-scroll
-      autoScroll();
     });
   </script>
 </body>
