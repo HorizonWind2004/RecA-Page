@@ -654,15 +654,15 @@
         <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
       </div>
 
-      <!-- Motivation Figure Placeholder -->
+      <!-- Motivation Figure -->
       <div class="bg-gray-50 rounded-xl shadow-md p-8 max-w-6xl mx-auto mb-12">
-        <div class="text-center">
-          <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-2 border-dashed border-blue-200 p-12">
-            <i class="fas fa-image text-4xl text-blue-400 mb-4"></i>
-            <p class="text-lg text-gray-600 font-medium">Motivation Figure</p>
-            <p class="text-sm text-gray-500 mt-2">Dense supervision from visual embeddings vs. sparse text captions</p>
-            <p class="text-xs text-gray-400 mt-1">(Figure from the paper - motivation_v6.pdf)</p>
-          </div>
+        <img src="static/files/teaser/motivation.jpg" alt="Dense supervision from visual embeddings vs. sparse text captions" class="w-full h-auto rounded-lg">
+        <div class="text-center mt-4">
+          <p class="text-sm text-gray-600 font-medium">
+            <strong>Dense supervision from visual embeddings.</strong> 
+            (a) Typical image generation models are trained on image-caption pairs where text provides only sparse supervision. 
+            (b) By contrast, embeddings from visual understanding encoders preserve richer and more faithful semantics.
+          </p>
         </div>
       </div>
 
@@ -743,10 +743,21 @@
       </div>
 
       <!-- The Misalignment Problem -->
-      <div class="mt-12 bg-yellow-50 rounded-xl shadow-md p-8 max-w-4xl mx-auto">
+      <div class="mt-12 bg-yellow-50 rounded-xl shadow-md p-8 max-w-5xl mx-auto">
         <div class="text-center mb-6">
           <h3 class="text-2xl font-semibold text-gray-800">Understanding vs. Generation Misalignment</h3>
         </div>
+        
+        <!-- Misalignment Example Image -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <img src="static/files/teaser/misalignment.jpg" alt="Yellow broccoli misalignment example" class="w-full h-auto rounded-lg">
+          <div class="text-center mt-4">
+            <p class="text-sm text-gray-600">
+              <strong>Example:</strong> UMMs can often correctly recognize an uncommon concept (yellow broccoli) but fail to generate it, revealing misalignment between understanding and generation.
+            </p>
+          </div>
+        </div>
+        
         <div class="flex flex-col md:flex-row items-center gap-8">
           <div class="flex-1">
             <div class="bg-white rounded-lg p-6 shadow-sm">
@@ -793,6 +804,8 @@
         <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
       </div>
       
+      <!-- Challenge and Solution content moved to Motivation section above -->
+      <!--
       <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         <div class="bg-white rounded-xl shadow-md p-6 card-hover">
           <h3 class="text-xl font-semibold text-gray-800 mb-4">The Challenge</h3>
@@ -810,6 +823,19 @@
             RecA implements a self-supervised training paradigm where a <span class="font-medium">understanding</span> vision encoder extracts features from the input image; these features are fused with template text embeddings and fed into a Unified Multimodal Model (UMM) to regenerate the image.
           </p>
           <p class="text-gray-700 mt-4">
+            We use the self-supervised loss between the original and generated images to optimize the UMM, providing dense supervision that preserves almost all fine-grained details that captions omit.
+          </p>
+        </div>
+      </div>
+      -->
+
+      <!-- RecA Method Overview -->
+      <div class="bg-white rounded-xl shadow-md p-8 max-w-5xl mx-auto">
+        <div class="prose-lg text-gray-700">
+          <p class="mb-6">
+            RecA implements a self-supervised training paradigm where a <span class="font-medium text-primary-600">understanding</span> vision encoder extracts features from the input image; these features are fused with template text embeddings and fed into a Unified Multimodal Model (UMM) to regenerate the image.
+          </p>
+          <p>
             We use the self-supervised loss between the original and generated images to optimize the UMM, providing dense supervision that preserves almost all fine-grained details that captions omit.
           </p>
         </div>
