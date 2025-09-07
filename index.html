@@ -650,7 +650,7 @@
   <section id="motivation" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">Motivation: Why Dense Visual Supervision?</h2>
+        <h2 class="text-3xl font-bold text-gray-900">Motivation: What's Wrong With Text Supervision?</h2>
         <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
       </div>
 
@@ -749,7 +749,7 @@
         </div>
         
         <!-- Misalignment Example Image -->
-        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8 max-w-3xl mx-auto">
           <img src="static/files/teaser/misalignment.jpg" alt="Yellow broccoli misalignment example" class="w-full h-auto rounded-lg">
           <div class="text-center mt-4">
             <p class="text-sm text-gray-600">
@@ -840,9 +840,36 @@
           </p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Pipeline Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">RecA Pipeline</h2>
+        <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
+      </div>
       
-      <div class="mt-12 bg-white rounded-xl shadow-md p-6 max-w-5xl mx-auto">
-        <img src="static/files/teaser/pipeline.jpg" alt="Figure 1: RecA Pipeline Overview" class="w-full h-auto rounded-lg">
+      <div class="bg-gray-50 rounded-xl shadow-md p-8 max-w-6xl mx-auto">
+        <div class="mb-8">
+          <img src="static/files/teaser/pipeline.jpg" alt="RecA Pipeline Overview" class="w-full h-auto rounded-lg shadow-sm">
+        </div>
+        
+        <div class="prose-lg text-gray-700">
+          <p class="mb-6">
+            <span class="font-semibold text-gray-800">Overview of the semantic reconstruction realignment (RecA) pipeline.</span>
+            A visual <span class="italic">understanding</span> encoder (<span class="italic">e.g.</span>, CLIP or DINO) extracts semantic features from the input image, which are fused with template text embeddings and passed to a Unified Multimodal Model (UMM) to regenerate the image.
+          </p>
+          <p class="mb-6">
+            The UMM is optimized with a self-supervised loss (diffusion or cross-entropy) between the original and reconstructed images.
+          </p>
+          <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg">
+            <p class="text-blue-800 font-medium">
+              <span class="font-bold"><em>At inference time, RecA requires no additional inputs beyond the text prompt, operating as a standard UMM.</em></span>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
