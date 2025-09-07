@@ -311,6 +311,7 @@
         </div>
         <div class="hidden md:flex items-center space-x-8">
           <a href="#abstract" class="text-gray-700 hover:text-primary-600 transition">Abstract</a>
+          <a href="#motivation" class="text-gray-700 hover:text-primary-600 transition">Motivation</a>
           <a href="#approach" class="text-gray-700 hover:text-primary-600 transition">Approach</a>
           <a href="#results" class="text-gray-700 hover:text-primary-600 transition">Results</a>
           <a href="#demo" class="text-gray-700 hover:text-primary-600 transition">Gallery</a>
@@ -645,6 +646,145 @@
     </div>
   </section>
 
+  <!-- Motivation Section -->
+  <section id="motivation" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">Motivation: Why Dense Visual Supervision?</h2>
+        <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
+      </div>
+
+      <!-- Motivation Figure Placeholder -->
+      <div class="bg-gray-50 rounded-xl shadow-md p-8 max-w-6xl mx-auto mb-12">
+        <div class="text-center">
+          <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-2 border-dashed border-blue-200 p-12">
+            <i class="fas fa-image text-4xl text-blue-400 mb-4"></i>
+            <p class="text-lg text-gray-600 font-medium">Motivation Figure</p>
+            <p class="text-sm text-gray-500 mt-2">Dense supervision from visual embeddings vs. sparse text captions</p>
+            <p class="text-xs text-gray-400 mt-1">(Figure from the paper - motivation_v6.pdf)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <!-- The Problem: Sparse Text Supervision -->
+        <div class="bg-gray-50 rounded-xl shadow-md p-8">
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+              </div>
+            </div>
+            <div class="ml-6">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">The Challenge: Sparse Text Supervision</h3>
+              <div class="space-y-4 text-gray-700">
+                <p>
+                  Conventional training of Unified Multimodal Models (UMMs) relies on <span class="font-medium text-red-600">image-text pairs</span>, where captions provide supervision. However, even captions spanning hundreds of words omit critical visual details:
+                </p>
+                <ul class="list-disc list-inside space-y-2 text-sm">
+                  <li><span class="font-medium">Spatial layout</span> and geometric structure</li>
+                  <li><span class="font-medium">Fine-grained attributes</span> like textures and styles</li>
+                  <li><span class="font-medium">Precise object shapes</span> and orientations</li>
+                  <li><span class="font-medium">Exact color distributions</span> and lighting</li>
+                </ul>
+                <div class="bg-red-50 border-l-4 border-red-400 p-4 mt-6">
+                  <div class="flex">
+                    <div class="flex-shrink-0">
+                      <i class="fas fa-quote-left text-red-400"></i>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-sm italic text-red-700">
+                        "An image is worth far more than a hundred words" — even lengthy captions miss key aspects, leading to biased correlations like <em>broccoli → green</em>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Solution: Dense Visual Embeddings -->
+        <div class="bg-gray-50 rounded-xl shadow-md p-8">
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                <i class="fas fa-lightbulb text-green-600 text-xl"></i>
+              </div>
+            </div>
+            <div class="ml-6">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">Our Solution: Dense Visual Supervision</h3>
+              <div class="space-y-4 text-gray-700">
+                <p>
+                  Instead of relying on sparse text captions, we leverage <span class="font-medium text-green-600">visual understanding encoder embeddings</span> that map pixels into a language-aligned semantic space:
+                </p>
+                <ul class="list-disc list-inside space-y-2 text-sm">
+                  <li><span class="font-medium">Semantic embeddings</span> from CLIP, SigLIP preserve richer details</li>
+                  <li><span class="font-medium">Dense supervision</span> without paired captions</li>
+                  <li><span class="font-medium">Language-aligned</span> and interpretable by UMMs</li>
+                  <li><span class="font-medium">Captures layout, color, attributes</span> beyond text descriptions</li>
+                </ul>
+                <div class="bg-green-50 border-l-4 border-green-400 p-4 mt-6">
+                  <div class="flex">
+                    <div class="flex-shrink-0">
+                      <i class="fas fa-question-circle text-green-400"></i>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-sm italic text-green-700">
+                        <em>Can we improve generation capabilities by training UMMs with semantic embeddings as maximally informative "visual prompts"?</em>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Misalignment Problem -->
+      <div class="mt-12 bg-yellow-50 rounded-xl shadow-md p-8 max-w-4xl mx-auto">
+        <div class="text-center mb-6">
+          <h3 class="text-2xl font-semibold text-gray-800">Understanding vs. Generation Misalignment</h3>
+        </div>
+        <div class="flex flex-col md:flex-row items-center gap-8">
+          <div class="flex-1">
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <div class="text-center">
+                <div class="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                  <i class="fas fa-eye text-blue-600 text-2xl"></i>
+                </div>
+                <h4 class="font-semibold text-gray-800 mb-2">Understanding</h4>
+                <p class="text-sm text-gray-600">✅ Can recognize "yellow broccoli"</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex-shrink-0">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
+              <i class="fas fa-times text-red-600 text-2xl"></i>
+            </div>
+          </div>
+          <div class="flex-1">
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <div class="text-center">
+                <div class="w-20 h-20 mx-auto bg-red-100 rounded-full flex items-center justify-center mb-4">
+                  <i class="fas fa-paint-brush text-red-600 text-2xl"></i>
+                </div>
+                <h4 class="font-semibold text-gray-800 mb-2">Generation</h4>
+                <p class="text-sm text-gray-600">❌ Fails to generate "yellow broccoli"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 text-center">
+          <p class="text-gray-700">
+            <span class="font-medium">The Gap:</span> UMMs often understand concepts they cannot generate, revealing fundamental misalignment between understanding and generation pathways.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Approach Section -->
   <section id="approach" class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -706,33 +846,8 @@
     </div>
   </section>
 
-  <!-- Enhanced Editing Section -->
-  <section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">Enhanced Editing Capabilities</h2>
-        <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
-      </div>
-      
-      <div class="bg-white rounded-xl shadow-md p-8 max-w-5xl mx-auto">
-        <div class="prose-lg text-gray-700">
-          <p class="mb-6">
-            We surprisingly discover that, for models with <span class="italic">image editing capabilities</span>, our method also significantly improves their editing performance. RecA demonstrates consistent improvements across all editing categories, increasing the ImgEdit scores from 3.38 to <span class="font-bold text-primary-600">3.75</span> and GEdit from 6.94 to <span class="font-bold text-primary-600">7.25</span>, using only <span class="italic">1,000 training steps and 8,000 unlabeled images</span>.
-          </p>
-          <p>
-            Our method unlocks the model's inherent editing potential without expensive annotation across various tasks like addition, replacement, stylization and color modification.
-          </p>
-        </div>
-        
-        <div class="mt-10">
-          <img src="static/files/teaser/edit_result.jpg" alt="Image Editing Results" class="w-full h-auto rounded-lg shadow-sm">
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Generalizability Section -->
-  <section class="py-20 bg-white">
+  <section class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-gray-900">Enhanced Generalizability</h2>
@@ -741,7 +856,7 @@
         </p>
       </div>
       
-      <div class="bg-gray-50 rounded-xl shadow-md p-8 max-w-5xl mx-auto">
+      <div class="bg-white rounded-xl shadow-md p-8 max-w-5xl mx-auto">
         <div class="prose-lg text-gray-700">
           <p class="mb-6">
             RecA achieves consistent performance gains across different UMM frameworks, showcasing its generalizability. We apply RecA to various unified multimodal models including Show-o (AR), Harmon (AR+MAR), OpenUni (AR+Diffusion), and BAGEL (AR+Diffusion).
@@ -753,6 +868,31 @@
         
         <div class="mt-10">
           <img src="static/files/teaser/t2i_result.jpg" alt="Text-to-Image Generation Results" class="w-full h-auto rounded-lg shadow-sm">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Editing Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">Enhanced Editing Capabilities</h2>
+        <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
+      </div>
+      
+      <div class="bg-gray-50 rounded-xl shadow-md p-8 max-w-5xl mx-auto">
+        <div class="prose-lg text-gray-700">
+          <p class="mb-6">
+            We surprisingly discover that, for models with <span class="italic">image editing capabilities</span>, our method also significantly improves their editing performance. RecA demonstrates consistent improvements across all editing categories, increasing the ImgEdit scores from 3.38 to <span class="font-bold text-primary-600">3.75</span> and GEdit from 6.94 to <span class="font-bold text-primary-600">7.25</span>, using only <span class="italic">1,000 training steps and 8,000 unlabeled images</span>.
+          </p>
+          <p>
+            Our method unlocks the model's inherent editing potential without expensive annotation across various tasks like addition, replacement, stylization and color modification.
+          </p>
+        </div>
+        
+        <div class="mt-10">
+          <img src="static/files/teaser/edit_result.jpg" alt="Image Editing Results" class="w-full h-auto rounded-lg shadow-sm">
         </div>
       </div>
     </div>
