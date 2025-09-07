@@ -219,7 +219,6 @@
     
     .edit-result {
       clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
-      transition: clip-path 0.1s ease;
     }
     
     .edit-slider {
@@ -646,22 +645,6 @@
     </div>
   </section>
 
-  <!-- Teaser Section -->
-  <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">Teaser</h2>
-        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-          RecA demonstrates remarkable improvements in multimodal understanding and generation capabilities
-        </p>
-      </div>
-      
-      <div class="bg-gray-50 rounded-xl p-6 max-w-5xl mx-auto">
-        <img src="static/files/teaser/teaser.jpg" alt="RecA Teaser" class="w-full h-auto rounded-lg shadow-md">
-      </div>
-    </div>
-  </section>
-
   <!-- Approach Section -->
   <section id="approach" class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -873,17 +856,24 @@
         const editResult = container.querySelector('.edit-result');
         const containerRect = container.getBoundingClientRect();
         let isDragging = false;
+        let animationFrame = null;
         
         function updateSliderPosition(clientX) {
-          const rect = container.getBoundingClientRect();
-          const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
-          const percentage = (x / rect.width) * 100;
+          if (animationFrame) {
+            cancelAnimationFrame(animationFrame);
+          }
           
-          // Update slider position
-          slider.style.left = `${percentage}%`;
-          
-          // Update clip-path for the edited image
-          editResult.style.clipPath = `polygon(${percentage}% 0%, 100% 0%, 100% 100%, ${percentage}% 100%)`;
+          animationFrame = requestAnimationFrame(() => {
+            const rect = container.getBoundingClientRect();
+            const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+            const percentage = (x / rect.width) * 100;
+            
+            // Update slider position
+            slider.style.left = `${percentage}%`;
+            
+            // Update clip-path for the edited image
+            editResult.style.clipPath = `polygon(${percentage}% 0%, 100% 0%, 100% 100%, ${percentage}% 100%)`;
+          });
         }
         
         // Mouse events
@@ -911,6 +901,7 @@
         document.addEventListener('touchmove', (e) => {
           if (isDragging && e.touches[0]) {
             updateSliderPosition(e.touches[0].clientX);
+            e.preventDefault(); // Prevent scrolling
           }
         });
         
