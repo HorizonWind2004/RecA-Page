@@ -804,54 +804,25 @@
         <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
       </div>
       
-      <!-- Challenge and Solution content moved to Motivation section above -->
-      <!--
-      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-          <h3 class="text-xl font-semibold text-gray-800 mb-4">The Challenge</h3>
-          <p class="text-gray-700 mb-4">
-            As shown in the figure, longer captions capture more details but still cannot fully represent the original image, missing the detailed <span class="font-medium text-primary-600">overall layouts, object shapes, instance attributes, etc</span>.
-          </p>
-          <p class="text-gray-700">
-            Vision embeddings from the understanding vision encoder are already mapped into the UMM's space while retaining richer visual information. <span class="font-medium italic">Can we prompt the UMMs with embeddings from visual understanding models to close this information gap?</span>
-          </p>
-        </div>
-        
-        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-          <h3 class="text-xl font-semibold text-gray-800 mb-4">Our Solution</h3>
-          <p class="text-gray-700">
-            RecA implements a self-supervised training paradigm where a <span class="font-medium">understanding</span> vision encoder extracts features from the input image; these features are fused with template text embeddings and fed into a Unified Multimodal Model (UMM) to regenerate the image.
-          </p>
-          <p class="text-gray-700 mt-4">
-            We use the self-supervised loss between the original and generated images to optimize the UMM, providing dense supervision that preserves almost all fine-grained details that captions omit.
+      <!-- Key Training Advantage -->
+      <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl shadow-md p-8 max-w-6xl mx-auto mb-12">
+        <div class="text-center">
+          <div class="flex justify-center items-center mb-4">
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+              <i class="fas fa-check-circle text-green-600 text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-semibold text-gray-800">Training Without Text-to-Image Data</h3>
+          </div>
+          <p class="text-lg text-gray-700 max-w-4xl mx-auto">
+            <span class="font-bold text-green-600">RecA requires NO text-to-image paired data for training.</span> 
+            Instead, we use pure <span class="font-medium text-blue-600">image-to-image reconstruction</span> with semantic visual embeddings, 
+            making training more efficient and eliminating the need for expensive caption datasets.
           </p>
         </div>
       </div>
-      -->
 
-      <!-- RecA Method Overview -->
-      <div class="bg-white rounded-xl shadow-md p-8 max-w-5xl mx-auto">
-        <div class="prose-lg text-gray-700">
-          <p class="mb-6">
-            RecA implements a self-supervised training paradigm where a <span class="font-medium text-primary-600">understanding</span> vision encoder extracts features from the input image; these features are fused with template text embeddings and fed into a Unified Multimodal Model (UMM) to regenerate the image.
-          </p>
-          <p>
-            We use the self-supervised loss between the original and generated images to optimize the UMM, providing dense supervision that preserves almost all fine-grained details that captions omit.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pipeline Section -->
-  <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">RecA Pipeline</h2>
-        <div class="mt-4 h-1 w-20 bg-primary-600 mx-auto"></div>
-      </div>
-      
-      <div class="bg-gray-50 rounded-xl shadow-md p-8 max-w-6xl mx-auto">
+      <!-- Pipeline Overview -->
+      <div class="bg-white rounded-xl shadow-md p-8 max-w-6xl mx-auto">
         <div class="mb-8">
           <img src="static/files/teaser/pipeline.jpg" alt="RecA Pipeline Overview" class="w-full h-auto rounded-lg shadow-sm">
         </div>
@@ -862,9 +833,36 @@
             A visual <span class="italic">understanding</span> encoder (<span class="italic">e.g.</span>, CLIP or DINO) extracts semantic features from the input image, which are fused with template text embeddings and passed to a Unified Multimodal Model (UMM) to regenerate the image.
           </p>
           <p class="mb-6">
-            The UMM is optimized with a self-supervised loss (diffusion or cross-entropy) between the original and reconstructed images.
+            RecA implements a <span class="font-medium text-primary-600">self-supervised training paradigm</span> where the UMM is optimized with a reconstruction loss (diffusion or cross-entropy) between the original and reconstructed images. This approach provides dense supervision that preserves almost all fine-grained details that captions omit.
           </p>
-          <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg">
+          
+          <!-- Key Benefits Grid -->
+          <div class="grid md:grid-cols-2 gap-6 mt-8">
+            <div class="bg-gray-50 rounded-lg p-6">
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                  <i class="fas fa-image text-blue-600"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-800 mb-2">Image-to-Image Reconstruction</h4>
+                  <p class="text-sm text-gray-600">Pure visual reconstruction without relying on text captions or paired data</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-6">
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                  <i class="fas fa-brain text-green-600"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-800 mb-2">Semantic Embeddings</h4>
+                  <p class="text-sm text-gray-600">Dense visual features from understanding encoders as "visual prompts"</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg mt-8">
             <p class="text-blue-800 font-medium">
               <span class="font-bold"><em>At inference time, RecA requires no additional inputs beyond the text prompt, operating as a standard UMM.</em></span>
             </p>
