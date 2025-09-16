@@ -185,6 +185,51 @@
       font-weight: 500;
     }
     
+    /* Gallery navigation arrows */
+    .gallery-nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      color: #374151;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+      z-index: 20;
+      opacity: 0.8;
+    }
+    
+    .gallery-nav-button:hover {
+      background: rgba(255, 255, 255, 1);
+      opacity: 1;
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    .gallery-nav-button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    
+    .gallery-nav-button:disabled:hover {
+      transform: translateY(-50%);
+    }
+    
+    .gallery-nav-left {
+      left: 10px;
+    }
+    
+    .gallery-nav-right {
+      right: 10px;
+    }
+    
     /* Edit comparison slider styles */
     .edit-comparison-container {
       position: relative;
@@ -390,8 +435,8 @@
           <a href="https://arxiv.org/abs/2509.07295" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 transition">
             <i class="fas fa-book-open mr-2"></i> ArXiv
           </a>
-          <a href="https://github.com/HorizonWind2004/reconstruction-alignment" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 transition">
-            <i class="fab fa-github mr-2"></i> Code
+          <a class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-800 cursor-not-allowed opacity-70">
+            <i class="fab fa-github mr-2"></i> Coming soon
           </a>
           <a href="https://huggingface.co/collections/sanaka87/reca-68ad2176380355a3dcedc068" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 transition">
             <i class="fas fa-robot mr-2"></i> HF Models
@@ -415,6 +460,14 @@
       </div>
       
       <div class="demo-gallery-container">
+        <!-- Gallery Navigation Buttons -->
+        <button id="galleryPrevBtn" class="gallery-nav-button gallery-nav-left" aria-label="Previous images">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="galleryNextBtn" class="gallery-nav-button gallery-nav-right" aria-label="Next images">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        
         <div class="demo-gallery" id="demoGallery">
 
           <div class="demo-item" data-prompt="A Van Gogh style painting of a cyberpunk city at sunrise.">
@@ -986,7 +1039,7 @@
           <a href="https://arxiv.org/abs/2509.07295" target="_blank" class="text-gray-300 hover:text-white transition">
             <i class="fas fa-book-open text-xl"></i>
           </a>
-          <a href="https://github.com/HorizonWind2004/reconstruction-alignment" target="_blank" class="text-gray-300 hover:text-white transition">
+          <a href="https://github.com/HorizonWind2004/RecA" target="_blank" class="text-gray-300 hover:text-white transition">
             <i class="fab fa-github text-xl"></i>
           </a>
           <a href="https://huggingface.co/collections/sanaka87/reca-68ad2176380355a3dcedc068" target="_blank" class="text-gray-300 hover:text-white transition">
@@ -1042,6 +1095,43 @@
     document.addEventListener('DOMContentLoaded', function() {
       const demoItems = document.querySelectorAll('.demo-item');
       const promptDisplay = document.getElementById('promptDisplay');
+      const demoGallery = document.getElementById('demoGallery');
+      const prevBtn = document.getElementById('galleryPrevBtn');
+      const nextBtn = document.getElementById('galleryNextBtn');
+      
+      // Gallery navigation functionality
+      const scrollAmount = 370; // Width of demo item + gap
+      
+      function updateNavButtons() {
+        const scrollLeft = demoGallery.scrollLeft;
+        const maxScroll = demoGallery.scrollWidth - demoGallery.clientWidth;
+        
+        prevBtn.disabled = scrollLeft <= 0;
+        nextBtn.disabled = scrollLeft >= maxScroll - 1; // -1 for rounding errors
+      }
+      
+      prevBtn.addEventListener('click', function() {
+        demoGallery.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+      
+      nextBtn.addEventListener('click', function() {
+        demoGallery.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Update button states on scroll
+      demoGallery.addEventListener('scroll', updateNavButtons);
+      
+      // Initial button state
+      updateNavButtons();
+      
+      // Update button states on window resize
+      window.addEventListener('resize', updateNavButtons);
       
       // Handle demo item clicks
       demoItems.forEach(item => {
