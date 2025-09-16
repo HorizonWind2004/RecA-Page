@@ -686,7 +686,7 @@
             Unified multimodal models (UMMs) unify visual understanding and generation within a single architecture. However, conventional training relies on image–text pairs (or sequences) whose captions are typically sparse and miss fine-grained visual details—even when they use hundreds of words to describe a simple image.
           </p>
           <p class="mb-6">
-            We introduce <span class="font-bold text-primary-600">Reconstruction Alignment</span> (<span class="font-bold text-primary-600">RecA</span>), a resource-efficient post-training method that leverages visual understanding encoder embeddings as dense "text prompts," providing rich supervision without captions. Concretely, RecA conditions a UMM on its own visual understanding embeddings and optimizes it to reconstruct the input image with a self-supervised reconstruction loss, thereby realigning understanding and generation.
+            We introduce <span class="font-bold text-primary-600">Reconstruction Alignment</span> (<span class="font-bold text-primary-600">RecA</span>), a resource-efficient post-training method that leverages visual understanding encoder embeddings as dense "text prompts," providing rich supervision without captions. Concretely, RecA conditions a UMM on its own visual understanding embeddings and optimizes it to reconstruct the input image with a self-supervised reconstruction loss, thereby realigning understanding and generation. <span class="font-medium text-green-600">Importantly, RecA does not require any image-to-text paired data</span>, relying purely on image reconstruction for training.
           </p>
           <p class="mb-6">
             Despite its simplicity, RecA is broadly applicable: across autoregressive, masked-autoregressive, and diffusion-based UMMs, it consistently improves generation and editing fidelity. With only <span class="font-bold text-primary-600">27 GPU-hours</span>, post-training with RecA substantially improves image generation performance on GenEval (<span class="font-bold text-primary-600">0.73→0.90</span>) and DPGBench (<span class="font-bold text-primary-600">80.93→88.15</span>), while also boosting editing benchmarks (ImgEdit <span class="font-bold text-primary-600">3.38→3.75</span>, GEdit <span class="font-bold text-primary-600">6.94→7.25</span>).
@@ -864,11 +864,11 @@
             <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
               <i class="fas fa-check-circle text-green-600 text-2xl"></i>
             </div>
-            <h3 class="text-2xl font-semibold text-gray-800">Training Without Text-to-Image Data</h3>
+            <h3 class="text-2xl font-semibold text-gray-800">Training Without Image-to-Text Data</h3>
           </div>
           <p class="text-lg text-gray-700 max-w-4xl mx-auto">
-            <span class="font-bold text-green-600">RecA requires NO text-to-image paired data for training.</span> 
-            Instead, we use pure <span class="font-medium text-blue-600">image-to-image reconstruction</span> with understanding visual embeddings.
+            <span class="font-bold text-green-600">RecA requires NO image-to-text paired data for training.</span> 
+            Instead, we use pure <span class="font-medium text-blue-600">image-to-image reconstruction</span> with understanding visual embeddings as supervision. This eliminates the dependency on captioned datasets and the limitations of sparse textual descriptions.
           </p>
         </div>
       </div>
@@ -887,6 +887,25 @@
           <p class="mb-6">
             RecA implements a <span class="font-medium text-primary-600">self-supervised training paradigm</span> where the UMM is optimized with a reconstruction loss (diffusion or cross-entropy) between the original and reconstructed images. This approach provides dense supervision that preserves almost all fine-grained details that captions omit.
           </p>
+          
+          <!-- Training Details -->
+          <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg mb-6">
+            <h4 class="font-semibold text-blue-800 mb-3">Training Configuration Details</h4>
+            <div class="space-y-3 text-blue-700">
+              <p class="text-sm">
+                <span class="font-bold">Details 1: </span> We <span class="font-bold">freeze the visual understanding encoder</span> in most cases, except when the UMM employs the same encoder for both understanding and generation (e.g., <span class="font-bold">Harmon, which uses an MAE encoder for both tasks</span>).
+              </p>
+              <p class="text-sm">
+                <span class="font-bold">Details 2: </span> For UMMs that <span class="font-bold">share parameters between understanding and generation components</span>, we preserve <span class="font-bold">image-to-text capability</span> during training; otherwise, we <span class="font-bold">freeze the understanding part entirely</span>.
+              </p>
+              <p class="text-sm">
+                <span class="font-bold">Details 3: </span> We <span class="font-bold">do not use text-to-image data</span> for training. Instead, RecA relies purely on <span class="font-bold">image reconstruction with understanding visual embeddings</span> as supervision.
+              </p>
+              <p class="text-sm">
+                <span class="font-bold">Details 4: </span> Input images are <span class="font-bold">resized to the minimum resolution</span> accepted by the visual encoder to ensure compatibility and optimal feature extraction (e.g., <span class="font-bold">224x224 for BAGEL's SigLIP</span>).
+              </p>
+            </div>
+          </div>
           
           <!-- Key Benefits Grid -->
           <div class="grid md:grid-cols-2 gap-6 mt-8">
