@@ -890,20 +890,55 @@
           
           <!-- Training Details -->
           <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg mb-6">
-            <h4 class="font-semibold text-blue-800 mb-3">Training Configuration Details</h4>
-            <div class="space-y-3 text-blue-700">
-              <p class="text-sm">
-                <span class="font-bold">Details 1: </span> We <span class="font-bold">freeze the visual understanding encoder</span> in most cases, except when the UMM employs the same encoder for both understanding and generation (e.g., <span class="font-bold">Harmon, which uses an MAE encoder for both tasks</span>).
-              </p>
-              <p class="text-sm">
-                <span class="font-bold">Details 2: </span> For UMMs that <span class="font-bold">share parameters between understanding and generation components</span>, we preserve <span class="font-bold">image-to-text capability</span> during training; otherwise, we <span class="font-bold">freeze the understanding part entirely</span>.
-              </p>
-              <p class="text-sm">
-                <span class="font-bold">Details 3: </span> We <span class="font-bold">do not use text-to-image data</span> for training. Instead, RecA relies purely on <span class="font-bold">image reconstruction with understanding visual embeddings</span> as supervision.
-              </p>
-              <p class="text-sm">
-                <span class="font-bold">Details 4: </span> Input images are <span class="font-bold">resized to the minimum resolution</span> accepted by the visual encoder to ensure compatibility and optimal feature extraction (e.g., <span class="font-bold">224x224 for BAGEL's SigLIP</span>).
-              </p>
+            <h4 class="font-semibold text-blue-800 mb-4 text-center">Training Configuration Details</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="bg-white rounded-lg p-4 border border-blue-200 shadow-sm">
+                <div class="text-center mb-3">
+                  <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <span class="text-blue-600 font-bold text-sm">1</span>
+                  </div>
+                  <h5 class="font-bold text-blue-800 text-sm">Encoder Freezing</h5>
+                </div>
+                <p class="text-xs text-blue-700 leading-relaxed">
+                  We <span class="font-bold">freeze the visual understanding encoder</span> in most cases, except when the UMM employs the same encoder for both tasks (e.g., <span class="font-bold">Harmon with MAE</span>).
+                </p>
+              </div>
+              
+              <div class="bg-white rounded-lg p-4 border border-blue-200 shadow-sm">
+                <div class="text-center mb-3">
+                  <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <span class="text-blue-600 font-bold text-sm">2</span>
+                  </div>
+                  <h5 class="font-bold text-blue-800 text-sm">Parameter Sharing</h5>
+                </div>
+                <p class="text-xs text-blue-700 leading-relaxed">
+                  For UMMs that <span class="font-bold">share parameters</span> between components, we preserve <span class="font-bold">image-to-text capability</span>; otherwise, we <span class="font-bold">freeze understanding entirely</span>.
+                </p>
+              </div>
+              
+              <div class="bg-white rounded-lg p-4 border border-blue-200 shadow-sm">
+                <div class="text-center mb-3">
+                  <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <span class="text-blue-600 font-bold text-sm">3</span>
+                  </div>
+                  <h5 class="font-bold text-blue-800 text-sm">Data Strategy</h5>
+                </div>
+                <p class="text-xs text-blue-700 leading-relaxed">
+                  We <span class="font-bold">do not use text-to-image data</span>. RecA relies purely on <span class="font-bold">image reconstruction</span> with understanding visual embeddings as supervision.
+                </p>
+              </div>
+              
+              <div class="bg-white rounded-lg p-4 border border-blue-200 shadow-sm">
+                <div class="text-center mb-3">
+                  <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <span class="text-blue-600 font-bold text-sm">4</span>
+                  </div>
+                  <h5 class="font-bold text-blue-800 text-sm">Image Preprocessing</h5>
+                </div>
+                <p class="text-xs text-blue-700 leading-relaxed">
+                  Input images are <span class="font-bold">resized to minimum resolution</span> accepted by the visual encoder (e.g., <span class="font-bold">224×224 for SigLIP</span>).
+                </p>
+              </div>
             </div>
           </div>
           
